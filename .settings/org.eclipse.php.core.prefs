@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+include_path=0;/SAT_TEST\u00055;org.zend.php.framework.CONTAINER\u00055;org.zend.php.framework.v2.CONTAINER\u00055;org.eclipse.dltk.USER_LIBRARY/Smarty
+use_asp_tags_as_php=false

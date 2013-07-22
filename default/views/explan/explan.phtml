@@ -1,0 +1,151 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+<?php 
+header('Content-Type:text/html;charset=utf-8');  
+//显示标题
+echo $this->escape($this->title);
+ ?>
+  </title>
+    <script>
+        function Search(){
+            document.getElementById('search').style.display = "block";
+            document.getElementById('nav').style.display = "none";
+        }
+//       function SearchRes(){
+//            document.getElementById('search').style.display = "block";
+//            document.getElementById('nav').style.display = "none";
+//        }
+        function Nav(){
+            document.getElementById('search').style.display = "none";
+            document.getElementById('nav').style.display = "block";
+        }
+        
+        function submit1(){
+            document.getElementById('search').style.display = "none";
+            document.getElementById('nav').style.display = "block";
+            document.getElementById("myform1").submit();   
+           // alert(11);
+        }
+       function submit2(){
+            document.getElementById('search').style.display = "block";
+            document.getElementById('nav').style.display = "none";
+            document.getElementById("myform2").submit();   
+            alert(11);
+        }
+        </script>
+        
+</head>
+<body >
+      <center>  <button onclick="Nav();">套题检索</button>
+        <button onclick="Search();">关键词检索</button>
+      </center>
+<div id="nav" style="margin:0 auto;width: 50%;" >       
+<form action="<?php echo $this->baseUrl()?>/explan/explan"  method="get" id="myform1">
+
+请选择你想要看的题目：第
+<select name="set" id="set">
+    <option selected="" >2013.Jan.NorthAmerica</option>
+</select>套题 &nbsp;&nbsp;
+SECTION
+<select name="section" id="section">
+    <option selected="" value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+<input type="hidden" name="page" value="1"/>
+<!--<input type="submit" name="submit" value="搜索"/>-->
+<input type="button" name="btn" value="搜索" onclick="submit1()" />
+<a href="../login/logout.php">注销</a>
+</form><br>
+    
+   
+<?php
+//输出选择套题和section得到的结果
+echo "<br>本SECTION总共有".$this->escape($this->message_count)."道题目。<br>";
+?>
+<div style="font-family: 'MS Serif', 'New York', sans-serif;font-size:18px;">
+    <?php
+echo "<br>".$this->questioncontent."<br><br>"; 
+for($j=0;$j<count($this->choice);$j++)
+{
+    echo "<div>".$this->choice[$j]['choice']."</div>";
+}
+echo "<br><a href=\"".$this->baseUrl()."/Myquestion/addquestion?questionid=".$this->questionid."\">Add to My List</a>";
+
+ //print_r($explanation);
+if(count($this->explanation)){
+    echo "<br><br> <strong> <font color=red> Choice (".$this->CorrectTag.") is Correct!</font></strong>".$this->explanation['0']['explanation']."<br>";
+ }
+ 
+ echo "错误选项的解析：<br>";
+ for($j=0;$j<count($this->WrongExplan);$j++)
+{
+    //echo "<div>".$this->WrongExplan[$j]['choice']."</div>";
+    echo "<div>".$this->WrongExplan[$j]['explanation']."</div>";
+}
+ 
+ if(count($this->EssayContent)){
+     echo "<idv>原文：<br/>".$this->EssayContent."</div>";
+ }
+  if(count($this->EssayExplan)){
+     echo "<idv>解析：<br/>".$this->EssayExplan."</div>";
+ }
+ 
+?>
+ </div>
+
+<center> 
+<?php
+//显示分页
+echo "<br><br><a href=".$this->baseUrl()."/explan/explan?set=".$this->set."&section=".$this->section."&page=1>首页</a>&nbsp;";
+if ($this->page!=1){
+    echo "<a href=".$this->baseUrl()."/explan/explan?set=".$this->set."&section=".$this->section."&page=".($this->page-1).">上一页</a>&nbsp;";
+}
+if($this->page<$this->page_count){
+    echo "<a href=".$this->baseUrl()."/explan/explan?set=".$this->set."&section=".$this->section."&page=".($this->page+1).">下一页</a>&nbsp;";
+}
+echo "<a href=".$this->baseUrl()."/explan/explan?set=".$this->set."&section=".$this->section."&page=".$this->page_count.">尾页</a>";   
+?>  
+</center>
+</div>
+
+<div id="search" style="display: none;margin:0 auto;width: 50%;">   
+
+<form action="<?php echo $this->baseUrl()?>/explan/search" id="myform2">
+    按<select name="dalei" id="section">
+    <option  value="类别">类别</option>
+    <option value="题目">题目</option>
+
+    </select>检索；
+    关键词：
+    <input type="text" name="keyword" style="width: 400px;"/>
+    <input type="button" name="btn" value="搜索" onclick="submit2()" />
+   <!-- <input type="submit" name="searchsubmit" onsubmit="Search();"/>-->
+</form>
+    <div id="searchresult">
+<?php
+//输出检索框检索出来的结果；
+if($this->keyword){
+    echo "按\"<font color=red>".$this->dalei."</font>\"检索,关键词为:<font color=green>".$this->keyword."</font>"; 
+    for ($k=0;$k<count($this->result);$k++)
+    {
+        echo "<br><font color=green >第".$k."条结果</font><br>".$this->result[$k]['question']."<a href=\"\">查看原题</a><br>";
+        }     
+    }else{
+        echo "<font color=red>请输入检索词！</font>";
+    }
+?>
+        </div>
+</div>
+
+</body>
+</html>

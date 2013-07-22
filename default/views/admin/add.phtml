@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="<?php echo $this->baseUrl();?>/public/ckeditor/ckeditor.js"></script>
+     <script type="text/javascript" language="javascript">
+         function TestBlack(TagName){
+             var obj = document.getElementById(TagName);
+             if(obj.style.display===""){
+                 obj.style.display="none";
+             }else{
+                 obj.style.display="";
+             }
+         }
+         
+         var k=1; 
+         function addQuestion() {
+             var objDiv = document.getElementById("addQuestion");
+             var objStr = "";
+             objStr =  '<input type="text" name="id[]"  />' + k+ '<br/><textarea name="text[]" ></textarea><br>';
+             objStr+='题号：<input type="text" name=qNo style="width:25px;"/>&nbsp; <div id="divc">题目内容：<textarea  name="qContent"></textarea>  </div> <br/>';
+             //alert(objStr);
+             objDiv.innerHTML += objStr;
+             k=k+1;      
+         }        
+</script>
+
+</head>
+    <body>
+        <?php 
+        header('Content-Type:text/html;charset=utf-8');
+        if($this->set!="."){
+            echo "<font color=red>套题".$this->set."添加成功！</font>";
+            echo '<br><font color=red>问题：'.$this->question.'添加成功！</font>';
+            echo '<br><font color=red>正确选项是：'.$this->answer.'！</font><br>';
+            echo "题号".$this->qNo;
+            echo "section:".$this->section;
+           
+            print_r($this->category);
+        }
+         echo "<font color=red>Insert ".$this->label."</font>";
+        ?>
+        
+
+ 
+<form action="<?php echo $this->baseUrl()?>/admin/add"  method="post"  >
+    
+
+    年份：<select  name="year">
+            <option>2006</option>
+            <option>2007</option>  
+            <option>2008</option> 
+            <option>2009</option>
+            <option>2010</option>  
+            <option>2011</option>
+            <option>2012</option>  
+            <option>2013</option>   
+       </select> &nbsp;
+    月份：<select name="month">
+            <option>Jan</option>
+            <option>May</option>  
+            <option>Oct</option> 
+       </select> &nbsp;
+    国家：<select name="country">
+            <option>.Asia</option>
+            <option>.NorthAmerica</option>  
+            <option>.</option> 
+       </select> &nbsp;
+        SECTION:<select name="section">
+            <option>1</option>
+            <option>2</option>  
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>  
+            <option>6</option> 
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>  
+            <option>10</option>
+       </select> &nbsp;</br>
+
+      <div  onclick="TestBlack('passage');"style="color:blue;">添加文章</div>
+        <div id="passage" style="display:none;">
+           文章类型<select name="ptag">
+                <option>psp</option>
+                <option>M1</option>
+                <option>M2</option>
+               <option>L</option>
+            </select><br>
+         文章内容：<textarea  name="pContent" ></textarea> 
+         文章解析：<textarea  name="pAnalysis"></textarea> 
+      </div>
+
+    题号：<input type="text" name="qNo" style="width:25px;"/>&nbsp;
+   
+        <div id="divc">
+    题目内容： <textarea  name="qContent"></textarea> 
+        </div>
+    <br/>
+    类别标签(可多选)：<br/>
+    <input type="checkbox" name="category[]" value="理解与推断"/> 理解与推断
+    <input type="checkbox" name="category[]" value="态度与语气"/> 态度与语气 
+    <input type="checkbox" name="category[]" value="主旨概要"/> 主旨概要
+    <input type="checkbox" name="category[]" value="词汇解释"/> 词汇解释
+    <input type="checkbox" name="category[]" value="功能作用"/> 功能作用<br/>
+    <input type="checkbox" name="category[]" value="写作方式"/> 写作方式 
+    <input type="checkbox" name="category[]" value="强化、弱化与类比"/> 强化、弱化与类比 
+    <input type="checkbox" name="category[]" value="互联题"/> 互联题   
+    
+    <br/>
+    <br/>正确选项为： <br/>
+    <input type="radio" name="answer" value="A"> A
+    <input type="radio" name="answer" value="B"> B  
+    <input type="radio" name="answer" value="C"> C
+    <input type="radio" name="answer" value="D"> D
+    <input type="radio" name="answer" value="E"> E
+    <br>
+     <div  onclick="TestBlack('divc');">添加题目</div>        
+    <br>
+    选项A内容：<br>
+    <textarea name="choiceA" style="height:45px;width:550px"></textarea><br>
+    选项A解析：<br>
+    <textarea name="Aanalysis" height="200px" width="200px"></textarea>
+    <div  onclick="TestBlack('B');"style="color:blue;">展开选项B</div>
+    <div id="B" style="display:none;">
+    选项B内容：<br>
+    <textarea name="choiceB" style="height:45px;width:550px"></textarea><br>
+    选项B解析：<br>
+    <textarea name="Banalysis" height="200px" width="200px"></textarea>
+    </div>
+    <div  onclick="TestBlack('C');"style="color:blue;">展开选项C</div>
+    <div id="C" style="display:none;">
+    选项C内容：<br>
+    <textarea name="choiceC" style="height:45px;width:550px"></textarea><br>
+    选项C解析：<br>
+    <textarea name="Canalysis" height="200px" width="200px"></textarea>
+    </div>
+    <div  onclick="TestBlack('D');"style="color:blue;">展开选项D</div>
+    <div id="D" style="display:none;">
+    选项D内容：<br>
+    <textarea name="choiceD" style="height:45px;width:550px"></textarea><br>
+    选项D解析：<br>     
+    <textarea name="Danalysis" height="200px" width="200px"></textarea>
+     </div>
+    <div  onclick="TestBlack('E');"style="color:blue;">展开选项E</div>
+    <div id="E" style="display:none;">
+    选项E内容：<br>
+    <textarea name="choiceE" style="height:45px;width:550px"></textarea><br>
+    选项E解析：<br>
+    <textarea name="Eanalysis" height="200px" width="200px"></textarea>
+    </div>
+    
+    
+    <!-- 动态添加一个表单。-->
+   <input type="button" onclick="addQuestion()" value="添加一个题目" /> <br/>
+   <div id="addQuestion"></div>    
+    
+   <br><input type="submit" value="存入数据库">
+    </form>
+
+    </body>
+    
+    
+<script> 
+     CKEDITOR.replace( 'Aanalysis', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Banalysis', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Canalysis', {
+               uiColor: '#9AB8F3',       
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Danalysis', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+     CKEDITOR.replace( 'Eanalysis', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'qContent', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/question_config.js'
+       });
+    CKEDITOR.replace( 'pAnalysis', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'pContent', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+ </script>
+</html>
+

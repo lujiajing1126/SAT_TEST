@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <script src="<?php echo $this->baseUrl();?>/public/javascript/jquery-2.0.0.js"></script>
+       <script src="<?php echo $this->baseUrl();?>/public/javascript/jqueryadd.js"></script>
+       <script src="<?php echo $this->baseUrl();?>/public/javascript/show.js"></script>
+       <script>
+       function yesno() { 
+           if(confirm("是否将此题目删除?")){
+               return true;
+               window.location.href=window.location.href;
+           }else return false;
+       } 
+       </script>
+       <link type="text/css" rel="stylesheet" href="<?php echo $this->baseUrl();?>/public/css/win.css" /> 
+<TITLE>第一个Zend framework程序</TITLE>
+</HEAD>
+<BODY style="margin:0 auto;width: 50%;">
+<?php
+
+//echo "username：".$this->userid;
+//echo "list:".$this->listid;
+//echo "orderby：".$this->orderby;
+//echo "<br>questionid:";
+//print_r($this->myquestionid);
+//echo "questionid:".$this->myquestionid;
+echo "userid:".$this->userid;
+echo "<br/>".$this->deleteRes;
+//echo $this->json;
+//echo "<br>";
+//print_r($this->listresult);
+
+ ?>
+    <?php
+    if(count($this->listresult)){
+        echo "<form action=\"".$this->baseUrl()."/Myquestion/show\">";
+        echo "List<select name=list>";
+        for($i=0;$i<count($this->listresult);$i++)
+        {
+            echo "<option value=".$this->listresult[$i]['listid'].">".$this->listresult[$i]['listname']."</option>";        
+        } 
+        echo "</select>";
+        echo "Order By <select name=orderby >";
+        echo "<option value=\"addtime\" >add time</option>";
+        echo "<option value=\"priority\" >priority</option></select>";
+        echo "<input type=submit value=\"submit\"/><br></form>";
+        
+        if($this->listid&&$this->orderby){
+        //如果结果不为空，显示结果；
+        if(count($this->myquestioninfo)){
+            //print_r($this->myquestioninfo);
+            echo "<table border=\"1\"><tr> <th>set</th> <th>section </th> <th>qnumber</th> <th>category</th><th>Add time</th><th>Link</th><th>Edit</th><th>Delete</th> </tr>";
+            for($i=0;$i<count($this->myquestioninfo);$i++){
+            for($j=0;$j<count($this->myquestioninfo[$i]);$j++){
+                echo "<tr>";
+                echo "<td>".$this->myquestioninfo[$i][$j]['set']."</td>";
+                echo "<td>".$this->myquestioninfo[$i][$j]['section']."</td>";
+                echo "<td>".$this->myquestioninfo[$i][$j]['qnumber']."</td>";
+                echo "<td>".$this->myquestioninfo[$i][$j]['category']."</td>";
+                echo "<td>".$this->myquestionAddtime[$i]."</td>";
+                echo "<td><a href=\"\">See</a></td>";
+                echo "<td><a onclick=\"show()\" href=\"#\">edit</a></td>";
+                echo "<td><a href=\"".$this->baseUrl()."/Myquestion/delete?questionid=".$this->myquestioninfo[$i][$j]['questionid']."&list=".$this->listid."&orderby=".$this->orderby."\" onclick=\"return confirm('是否将此题目删除?')\">Delete</a></td>";
+                echo "</tr>";
+            }
+            }
+            echo "</table>";
+            
+        }else{
+           echo "<a href=\"".$this->baseUrl()."/explan/explan\"><font color=blue>对不起该list下题目为空，去题库找找吧！</font></a>";     
+        }
+        }else{
+            echo "请选择list和orderby.";
+        }
+        
+    }else{
+        echo "<a href=\"".$this->baseUrl()."/explan/explan\"><font color=blue>你还没有收藏题目，去题库找找吧！</font></a>";
+    }
+   ?>
+    <div id="win">
+        <div id="title">编辑这个题目<span id="close" onclick="hide();">X</span></div>
+        <div id="content">
+            <input name="list"/>
+            <input name="priority"/>
+            <input type="submit" value="submit"/>
+        </div>
+    </div>
+    
+    
+    
+    
+</BODY>
+</HTML>

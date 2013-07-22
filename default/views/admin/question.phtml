@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="<?php echo $this->baseUrl();?>/js/lib/jquery.min.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/public/ckeditor/ckeditor.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/js/adminctr.js"></script>
+    <link href="<?php echo $this->baseUrl();?>/css/adminctr.css" rel="stylesheet" type="text/css" />   
+</head>
+    <body>
+<div id="container">
+  <div id="header">
+    <div id="menu-content">
+	<ul id="menu">
+		<li class="li_out" onmouseover="changeDiv(1);"><div style="color:#FFFFFF;font-weight: bold;font-family:'Bookman Old Style', serif; ">Home</div></li>
+		<li class="li_out" onmouseover="changeDiv(2);"><div style="color:#CCFFCC;font-weight: bold;font-family:'Bookman Old Style', serif;">Question</div></li>
+		<li class="li_out" onmouseover="changeDiv(3);"><div style="color:#CCFF99;font-weight: bold;font-family:'Bookman Old Style', serif;">Question Info.</div></li>
+		<li class="li_out" onmouseover="changeDiv(4);"><div style="color:#CCFF00;font-weight: bold;font-family:'Bookman Old Style', serif;">Choice A</div></li>
+		<li class="li_out" onmouseover="changeDiv(5);"><div style="color:#CCFFFF;font-weight: bold;font-family:'Bookman Old Style', serif;">Choice B</div></li> 
+		<li class="li_out" onmouseover="changeDiv(6);"><div style="color:#0099CC;font-weight: bold;font-family:'Bookman Old Style', serif;">Choice C</div></li>
+		<li class="li_out" onmouseover="changeDiv(7);"><div style="color:#33CC99;font-weight: bold;font-family:'Bookman Old Style', serif;">Choice D</div></li> 
+		<li class="li_out" onmouseover="changeDiv(8);"><div style="color:#666633;font-weight: bold;font-family:'Bookman Old Style', serif;">Choice E</div></li>
+		<li class="li_out" onmouseover="changeDiv(9);"><div> </div></li>
+	</ul>
+     </div>
+  </div>
+  <div id="mainContent">
+        <form action="<?php echo $this->baseUrl()?>/admin/question"  method="post"  name="qform">
+                <div id="i1" class="innerContainer" style="background:#C6D8E8;display:block;">
+                    <br/><br/><br/><br/>
+                    <center>
+                    <span style="text-align:center;color:blue;font-weight:bold;font-size:20px;font-family: 'MS Serif','New York', sans-serif;">
+                        This module is designed for <br/>inserting Question and it's analysis,<br/>
+                        Questions inserted into the database<br/>can't be updated by now,<br/>
+                        So you are expected to <br/>be careful to avoid unnecessary trouble.<br/><br/><br/>
+                        
+                        <font color='red'>If you need to insert passage,<br/>please click here!</font><br/><br/>
+                        <div><a href="<?php echo $this->baseUrl(); ?>/admin/passage"  style="text-decoration: none;">Insert Passage</a></div>
+                        <br/><br/>
+                        <a href="<?php echo $this->baseUrl(); ?>/index" style="text-decoration: none;font-family: 'Comic Sans MS', cursive;font-size:30px;color:yellow">Sachme.Com</a>
+                    </span>
+                          
+                    </center>
+                </div>
+                <div id="i2" class="innerContainer" style="background:#C6D8E8;display:none;">
+                    <center><br/><br/>
+                        <table><tr><td>
+               Year<select  name="year" class="year"> 
+                    <option>2006</option>
+                    <option>2007</option>  
+                    <option>2008</option> 
+                    <option>2009</option>
+                    <option>2010</option>  
+                    <option>2011</option>
+                    <option>2012</option>  
+                    <option>2013</option>   
+                    </select> &nbsp;
+                    </td><td>
+                Month<select name="month" class="month">
+                    <option>Jan</option>
+                    <option>May</option>  
+                    <option>Oct</option> 
+                    </select> &nbsp;
+                    </td><td>
+               Country<select name="country" class="country">
+                    <option>.Asia</option>
+                    <option>.NorthAmerica</option>  
+                    <option>.</option> 
+                    </select> &nbsp;
+                    </td><td>
+               Section<select name="section" class="section">
+                    <option>1</option>
+                    <option>2</option>  
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>  
+                    <option>6</option> 
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>  
+                    <option>10</option>
+                    </select> &nbsp;<br/>
+                    </td></tr><tr><td>
+             Passage Type<select name="ptag" class="ptag">
+                    <option>None</option>
+                    <option>PSP</option>
+                    <option>M1</option>
+                    <option>M2</option>
+                    <option>L</option>
+                    <option>SP1</option>
+                    <option>SP2</option>
+                    </select>
+                    </td><td>
+             Question Type<select name="qtype" >
+                     <option>Vocab</option>
+                     <option>Passage</option>
+                     </select>
+                     </td><td>
+              Question No.<input type="text" name="qNo"  class="qNo" style="width:80px;"/>&nbsp;                                           
+                     </td><td></table><br/>
+            <strong>Question Content </strong><br/><br/>
+            <textarea  name="qContent" class="qcontent"></textarea>  
+            </center>
+            </div>
+            
+            <div id="i3" class="innerContainer" style="background:#C6D8E8;display:none;">
+                <center><br/><br/>  
+                <strong> Unfamiliar Words</strong><span style="color:red;">(Use";" to partition multiple words!)</span>;<br/><br/>
+                <textarea name="words" style="height:180px;width:650px"></textarea><br/><br/><br/>
+                <strong>Reading Label</strong> (Multiple choice)<br/><br/>
+                    <table>
+                        <tr>
+                    <td><input type="checkbox" name="category[]" value="Understanding & Reasoning"/>Understanding & Reasoning</td>
+                    <td><input type="checkbox" name="category[]" value="Attitude & Tone"/>Attitude & Tone</td>
+                    <td><input type="checkbox" name="category[]" value="Primary Purpose"/>Primary Purpose</td>
+                        </tr>
+                        <tr>
+                    <td><input type="checkbox" name="category[]" value="Vocabulary in Context"/>Vocabulary in Context</td>
+                    <td><input type="checkbox" name="category[]" value="Segment Function "/> Segment Function </td>
+                    <td><input type="checkbox" name="category[]" value="Writting Strategy"/>Writting Strategy</td>
+                        </tr>
+                        <tr>
+                    <td><input type="checkbox" name="category[]" value="Analogy & Hypothetical Reasoning"/>Analogy & Hypothetical Reasoning</td>
+                    <td><input type="checkbox" name="category[]" value="Paired Passage Correlation"/>Paired Passage Correlation </td>
+                        </tr>
+                    </table><br/><br/>
+               <strong>Vocabulary Label</strong> (Multiple choice)<br><br/>    
+                    <input type="checkbox" name="category[]" value="Comprehensive Reasoning"/>Comprehensive Reasoning
+                    <input type="checkbox" name="category[]" value="Direct Inference"/>Direct Inference <br/><br/>      
+               <strong>The Right Choice Is：</strong> <br/><br/>
+                    <input type="radio" name="answer"  value="A"> A
+                    <input type="radio" name="answer" value="B"> B  
+                    <input type="radio" name="answer" value="C"> C
+                    <input type="radio" name="answer" value="D"> D
+                    <input type="radio" name="answer" value="E"> E
+               </center>
+         </div>
+                
+         <div id="i4" class="innerContainer" style="background:#C6D8E8;display:none;">
+             <center>
+                 <strong>Content of Choice A</strong><br/>
+                     <textarea name="choiceA" style="height:45px;width:550px"></textarea><br/><br/>
+                 <strong>Analysis of Choice A</strong><br/>
+                     <textarea name="Aanalysis" height="200px" width="200px"></textarea>
+             </center>
+         </div>
+          
+         <div id="i5" class="innerContainer" style="background:#C6D8E8;display:none;">
+             <center>
+                 <strong>Content of Choice B</strong><br/>
+                     <textarea name="choiceB" style="height:45px;width:550px"></textarea><br/><br/>
+                 <strong>Analysis of Choice B</strong><br/>
+                     <textarea name="Banalysis" height="200px" width="200px"></textarea>
+             </center>
+        </div>
+        
+        <div id="i6" class="innerContainer" style="background:#C6D8E8;display:none;">
+            <center>
+                <strong>Content of Choice C</strong><br/>
+                    <textarea name="choiceC" style="height:45px;width:550px"></textarea><br/><br/>
+                <strong>Analysis of Choice C</strong><br/>
+                    <textarea name="Canalysis" height="200px" width="200px"></textarea>
+           </center>
+       </div>
+          
+       <div id="i7" class="innerContainer" style="background:#C6D8E8;display:none;">
+           <center>
+               <strong>Content of Choice D</strong><br/>
+                   <textarea name="choiceD" style="height:45px;width:550px"></textarea><br/><br/>
+               <strong>Analysis of Choice D</strong><br/>     
+                   <textarea name="Danalysis" height="200px" width="200px"></textarea>
+          </center>
+       </div>
+                      
+       <div id="i8" class="innerContainer" style="background:#C6D8E8;display:none;">
+           <center>
+               <strong>Content of Choice E</strong><br/>
+                   <textarea name="choiceE" style="height:45px;width:550px"></textarea><br/><br/>
+               <strong>Analysis of Choice E</strong><br/>
+                   <textarea name="Eanalysis" height="200px" width="200px"></textarea>
+           </center>
+      </div>
+  
+     <input type=submit id="" class="" style="background-color:#99CC33; height:30px; margin-left:1100px; margin-top:30px;bolder:0px solid;border-width:0px;" value="Insert Question">
+     <?php echo "<span style=\"color:red; height:30px; margin-left:1100px; margin-top:10px\"> Insert ".$this->label."</span>";?><br/>
+     </form>
+
+    </div>
+     <div id="footer"></div>    
+ </div> 
+</body>
+    
+    
+<script> 
+     CKEDITOR.replace( 'Aanalysis', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Banalysis', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Canalysis', {
+               uiColor: '#9AB8F3',       
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'Danalysis', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+     CKEDITOR.replace( 'Eanalysis', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    CKEDITOR.replace( 'qContent', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/question_config.js'
+       });
+ </script>
+</html>
+

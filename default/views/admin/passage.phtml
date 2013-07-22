@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="<?php echo $this->baseUrl();?>/js/lib/jquery.min.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/public/ckeditor/ckeditor.js"></script>
+    <script src="<?php echo $this->baseUrl();?>/js/adminctr.js"></script>
+    <link href="<?php echo $this->baseUrl();?>/css/adminctr.css" rel="stylesheet" type="text/css" />   
+</head>
+    
+<body>      
+<div id="container">
+  <div id="header">
+    <div id="menu-content">
+	<ul id="menu">
+		<li class="li_out" onmouseover="changeDiv(1);"><div style="color:#FFFFFF">Home</div></li>
+		<li class="li_out" onmouseover="changeDiv(2);"><div style="color:#FFFFCC">Passage</div></li>
+		<li class="li_out" onmouseover="changeDiv(3);"><div style="color:#CCFF99">Passage Analysis</div></li>
+		<li class="li_out" onmouseover="changeDiv(4);"><div style="color:#CCFFFF">Extend Reading</div></li>
+		<li class="li_out" ><div> </div></li>
+	</ul>
+     </div>
+  </div>
+        
+<div id="mainContent">
+    <form action="<?php echo $this->baseUrl()?>/admin/passage"  method="post" name="pform"  >
+    <div id="i1" class="innerContainer" style="background:#C6D8E8;display:block;">
+        <br/><br/><br/><br/>
+                    <center>
+                    <span style="text-align:center;color:blue;font-weight:bold;font-size:20px;font-family: 'MS Serif','New York', sans-serif;">
+                        This module is designed for <br/>inserting Passage and it's Analysis & Extend Reading,<br/><br/><br/>
+                        <font color='red'>If you need to insert question,<br/>please click here!</font><br/><br/>
+                        <div><a href="<?php echo $this->baseUrl(); ?>/admin/question" style="text-decoration: none;">Insert Question</a></div>
+                        <br/><br/>
+                        <a href="<?php echo $this->baseUrl(); ?>/index" style="text-decoration: none;font-family: 'Comic Sans MS', cursive;font-size:30px;color:yellow">Sachme.Com</a>
+                    </span>
+    </div>
+    
+    <div id="i2" class="innerContainer" style="background:#C6D8E8;display:none;">
+        <center><br/>
+    Year<select  name="year" class="year" >
+            <option>2006</option>
+            <option>2007</option>  
+            <option>2008</option> 
+            <option>2009</option>
+            <option>2010</option>  
+            <option>2011</option>
+            <option>2012</option>  
+            <option>2013</option>   
+        </select> &nbsp;
+   Month<select name="month" class="month">
+            <option>Jan</option>
+            <option>May</option>  
+            <option>Oct</option> 
+        </select> &nbsp;
+ Country<select name="country" class="country">
+            <option>.Asia</option>
+            <option>.NorthAmerica</option>  
+            <option>.</option> 
+        </select> &nbsp;
+ Section<select name="section" class="section">
+            <option>1</option>
+            <option>2</option>  
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>  
+            <option>6</option> 
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>  
+            <option>10</option>
+        </select> &nbsp;
+        Passage Type<select name="ptag" class="ptag">
+            <option>PSP</option>
+            <option>M1</option>
+            <option>M2</option>
+            <option>SP1</option>
+            <option>SP2</option>
+            <option>L</option>
+        </select><br/><br/>
+ <strong>Passage Content</strong><br/><br/>
+       <textarea  name="pContent1"  id="pContent"></textarea>
+       </center>
+   </div>
+   <div id="i3" class="innerContainer" style="background:#C6D8E8;display:none;"><br/><br/>
+       <center>
+  <strong> Passage Analysis</strong><br/><br/><textarea  name="pAnalysis1" id="pAnalysis"></textarea> 
+       </center>
+   </div>
+   <div id="i4" class="innerContainer" style="background:#C6D8E8;display:none;"><br/><br/>
+       <center>
+  <strong>Extend Reading</strong><br/><br/><textarea  name="extendreading" id="extendreading"></textarea> 
+       </center>
+   </div>
+   
+    <input type="submit"  style="background-color:#99CC33; height:30px;width: 120px; margin-left:1100px; margin-top:30px;border-width:0px;" value="Insert Passage"/>
+    <?php echo "<span style=\"color:red; height:30px; margin-left:1100px; margin-top:3cm\"> Insert ".$this->label."</span>";?><br/> 
+
+</form>
+    <button  class="btn1" style="background-color:#6699CC; height:30px;width:120px; margin-left:1100px; margin-top:35px;border-width:0px;">Update Passage</button>
+    <div id="label" style="color:red;height:30px; margin-left:1100px; margin-top:10px" ></div>
+    </div>
+    <div id="footer"></div>    
+</div>
+</body>
+    
+    
+<script>     
+  $(document).ready(function(){    
+    var editor1=CKEDITOR.replace( 'pAnalysis1', {
+              uiColor: '#9AB8F3',
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+    var editor2=CKEDITOR.replace( 'pContent1', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       });
+   var editor3=CKEDITOR.replace( 'extendreading', {
+        customConfig: '<?php echo $this->baseUrl(); ?>/public/ckeditor/ckeditor_config.js'
+       }); 
+       
+     $(".btn1").click(function(){
+             var year=$(".year").val();;
+	     var month=$(".month").val();
+	     var country=$(".country").val();
+             var section=$(".section").val();
+             var ptag=$(".ptag").val();
+             var pContent1=editor2.document.getBody().getHtml(); 
+             var pAnalysis1=editor1.document.getBody().getHtml(); 
+             var extendreading=editor3.document.getBody().getHtml();
+             //alert(pContent);
+             //alert(pAnalysis);
+             $.post("<?php echo $this->baseUrl(); ?>/admin/updatep",{ "year": year,"month":month,"country":country,"section": section,"ptag":ptag,"pContent":pContent1,"pAnalysis":pAnalysis1,"extendreading":extendreading},
+          function(data){
+              //alert(data);
+              $("#label").text(data);
+           },"html");
+
+});
+});     
+ </script>
+</html>
+

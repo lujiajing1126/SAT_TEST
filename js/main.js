@@ -38,7 +38,7 @@ function loadtiku(){
                 });
                 $.each(data.choices,function(i,item){
                         
-                        if(item.answer){
+                        if(item.answer==1){
                         $("#questionanalysis").append(
                                 "<div class=\"questionlistitemcor\" id=\"questionlistitemcor\">"+
                                 "<div class=\"questioncorrect\">√</div>"+

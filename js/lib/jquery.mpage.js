@@ -1,11 +1,11 @@
 /**
-* jQuery mPage v0.2
+* jQuery mPage v0.3
 *
 * @Plugin Name: mPage
 * @author: megrez
-* @Update Time:Jul 19, 2013
+* @Update Time:Jul 23, 2013
 *
-* Copyright 2012 Megrez
+* Copyright 2013 Megrez
 * Powered By jQuery
 */
 ; (function ($) {
@@ -28,13 +28,30 @@
     };
     function appendNav() {
     	$(".holder").empty();
-        $(".holder").append('<a class="mpage_prev arrow">prev</a>');
+    	if(allpage!=0 && allpage !=1)  {
+    		$(".holder").append('<a class="mpage_prev arrow">prev</a>');
+    	}
         for(i=1;i<=allpage;i++) {
-            $(".holder").append('&nbsp;&nbsp;&nbsp;');
-            $(".holder").append('<a class="mpage_no arrow">'+i+'</a>');
-        };
-        $(".holder").append('&nbsp;&nbsp;&nbsp;');
-        $(".holder").append('<a class="mpage_next arrow">next</a>');
+        	if(allpage<=11)  {
+        		$(".holder").append('&nbsp;&nbsp;&nbsp;');
+        		$(".holder").append('<a class="mpage_no arrow">'+i+'</a>');
+        	}else if(allpage>11)  {
+        		$(".holder").append('&nbsp;&nbsp;&nbsp;');
+        		if(i==1)  {
+        			$(".holder").append('<a class="mpage_no arrow">'+1+'</a>');
+        		}else if(i==allpage && allpage !=1)  {
+        			$(".holder").append('<a class="mpage_no arrow">'+i+'</a>');
+        		}else if((i<currentpage-5 && i>1) || (i>currentpage+5 && i<allpage))  {
+        			$(".holder").append('<a>'+'...'+'</a>');
+        		}else {
+        			$(".holder").append('<a class="mpage_no arrow">'+i+'</a>');
+        		}
+        	}
+        }
+        if(allpage!=0 && allpage !=1)  {
+        	$(".holder").append('&nbsp;&nbsp;&nbsp;');
+        	$(".holder").append('<a class="mpage_next arrow">next</a>');
+        }
         setTimeout(bindNav(),100);
     };
 
@@ -77,9 +94,9 @@
         for (i = startrec; i <= endrec; i++) {
         	var trs = "";
 			trs += "<li><div class=\"ucplistitem\">";
-			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Question "+ jsonarray[i].qnumber+ "</div><div style=\"float:right;\">"+ jsonarray[i].addtime+ "</div></div>";
+			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><div style=\"float:right;\">"+ jsonarray[i].addtime+ "</div></div>";
 			trs += "<div class=\"ucplistitemdate\">"+ jsonarray[i].set + "</div>";
-			trs += "<div class=\"ucplistitemlabel\">"+ jsonarray[i].section+ "</div></div></li>";
+			trs += "<div class=\"ucplistitemlabel\" name=\"questionlabel\">"+ jsonarray[i].category+ "</div></div></li>";
 			tbody += trs;
         }
         parent.append(tbody);

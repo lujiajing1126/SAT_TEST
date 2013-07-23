@@ -45,3 +45,20 @@ else {
 	button.className="toolboxbutR";
 }
 }
+
+function extendedreading_ctrl() {
+var popupbg= document.getElementById("popupbg0");
+var button= document.getElementById("extendedreadingbutton");
+var popupcontainer0= document.getElementById("popupcontainer0");
+var viewport3= document.getElementById("viewport3");
+if (popupbg0.style.height=="0px"){
+	popupbg0.style.height="100%";
+	button.className="toolboxbutRPed";
+}
+else {
+	popupbg0.style.height="0px";
+	button.className="toolboxbutR";
+}
+viewport3.style.height= popupcontainer0.offsetHeight-60+"px";
+$('#extreadingcontainer').tinyscrollbar();	
+}

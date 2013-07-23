@@ -18,7 +18,8 @@ function loadctb() {//不刷新错题本列表获得新的错题列表
 						console.log(data);
 						$("div.ucprightcol").load('/SAT_TEST/getothers/getctb', {}, function() {
 							$("#itemContainer").mpage({},data);
-							loadlist();
+							loadlist();	
+							resetlabelcolor();
 						});
 					}, "json");
 
@@ -64,10 +65,11 @@ function loadrightcol2() {//不刷新列表获得新的错题列表
 					},
 					function(data) {
 						$("#itemContainer").mpage({},data);
+						resetlabelcolor();
 					},"json");
 	
 }
 
 $(document).ready(function() {
-	loadctb(1);
+	loadctb();
 });

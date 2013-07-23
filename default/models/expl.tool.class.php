@@ -393,7 +393,7 @@ class explTool{
        
        function getQnumber($section,$set){
            $pdo=mypdo::getPdo();
-           $sql=" select distinct question.qnumber from question where question.set=? and question.section=? order by qnumber; ";
+           $sql=" select distinct question.qnumber,question.category from question where question.set=? and question.section=? order by qnumber;  ";
            $sth = $pdo->prepare($sql);
            $sth->execute(array($set,$section));          
            $qinfo=$sth->fetchAll();

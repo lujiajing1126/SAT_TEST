@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -16,14 +16,15 @@
 <script type="text/javascript" src="/{$APPNAME}/js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/lib/jquery.mpage.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/lib/jquery.tinyscrollbar.min.js"></script>
+<script type="text/javascript" src="/{$APPNAME}/js/lib/require.js" defer async="true" ></script>
 <!-- 加载页面js脚本 -->
 <script type="text/javascript" src="/{$APPNAME}/js/loading.js"></script>
-<script type="text/javascript" src="/{$APPNAME}/js/ajax.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/logincontrol.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/main.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/toolbar.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/ucpcontrol.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/colheightctrl.js"></script>
+<script type="text/javascript" src="/{$APPNAME}/js/ajax.js"></script>
 <!-- 运行js脚本 -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -52,8 +53,23 @@
     </script>
 
 </head>
-    
-<body oncontextmenu="return false" >
+
+<body>
+<!--<body oncontextmenu="return false" >-->
+    <div class="popupbackground" id="popupbg0" style="height:0px;">
+	<div class="popupcontainer" id="popupcontainer0">
+    	<div id="extreadingcontainer">
+		<div class="scrollbar" id="scrollbarcon3"><div class="track" id="scrollbartrack3"><div class="thumb"><div class="end"></div></div></div></div>
+		<div class="viewport" id="viewport3">
+			 <div class="overview" id="overview3">
+             
+             </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+
 <div id="loading"><div id="loading-gif"></div></div>
 	<div id="itemMenu" style="display: none">
 		<table border="1" width="100%" height="100%" bgcolor="#cccccc"
@@ -73,13 +89,13 @@
 		</table>
 	</div>
 	<section name="header">
-	<div class="headercontainer" id="headercon">
+	<div class="headercontainer" {if $flg eq TRUE}id="headercon"{else}{/if} >
 		<div class="ucpblock" id="ucpblock">
 			<div class="container" style="height: 100%;">
 				{if $flg eq TRUE}
-				<span style="cursor: pointer">
-					<a href="/{$APPNAME}/auth/logout">Logout</a>
-				</span>
+				<div style="text-align:center;"><span style="text-align:center; cursor:default;">
+					Hover to Expand Your Profile Console
+				</span></div>
 				{else}
 				<span style="cursor: pointer" onclick="loginexpand()">Login</span>
 				&nbsp | &nbsp
@@ -92,7 +108,7 @@
 							<div class="ucpusername">{$username}</div>
 						</div>
 						<div style="padding-top: 210px;">
-							<div class="ucpbutton2" onclick="loadctb()">My Error List</div>
+							<div class="ucpbutton2" onclick="loadctb()">My Folders</div>
 							<div class="ucpbutton" onclick="loadrightcol()">Manage My Account</div>
 						</div>
 					</div>
@@ -106,13 +122,20 @@
 		</div>
 		<div class="navcontainer" id="navcon">
 			<div class="container" style="z-index: 3;">
-				<div class="navLogo">
-					<img src="/{$APPNAME}/img/Logo_beta.png" />
+				<div class="navLogo" onclick="setindexbgimg()">
+					<img src="/{$APPNAME}/img/logo_beta.png" />
 				</div>
-				<a>调试信息：{$information}</a>
-				<div class="navbut" onclick="loginexpand()">
+				<!--调试信息：{$information}-->
+                                {if $flg eq TRUE}
+				<a href="/{$APPNAME}/auth/logout"><div class="navbut">
+					<li style="font-weight: 700;">LOGOUT</li>
+				</div></a>
+                                    
+                                {else}
+                                <div class="navbut" onclick="loginexpand()">
 					<li style="font-weight: 700;">LOGIN</li>
 				</div>
+                                {/if}
 				<div class="navbut">
 					<li>SACH DOCS</li>
 				</div>
@@ -158,6 +181,7 @@
 		</div>
 	</div>
 	</section>
+{if $flg eq TRUE}
 <section name="toolbox">
     
     <div style="position:absolute; width:100%; padding-top:160px;"><div class="container">
@@ -174,10 +198,10 @@
 					var i=0;
 					function clearfavoriteselection() {
 						for (i=0;i<rateitem.length;i++){
-							rateitem.item(i).innerHTML= "○";
+							rateitem.item(i).innerHTML= "☆";
 						}
-					}				
-					</script>
+					}
+				</script>
                 <script>
 					var foldername= document.getElementById("foldername");
 					var priority= document.getElementById("priority");
@@ -186,7 +210,7 @@
                 <div class="container" id="favoritecontainer" style="width:80%; padding-top:30px; line-height:22px;">            
                 </div>
                 <!-- item end -->
-		<div class="container" style="width:80%; padding-top:30px; line-height:22px;">
+                <div class="container" style="width:80%; padding-top:10px; line-height:22px;">
                 <div style="clear:both; height:5px;"></div>
                 <div class="favoriteadditem">
                 	<form id="favoriteadditem" style="display:none;">
@@ -211,6 +235,7 @@
 					</script>
                 </div>
                 </div>
+
                 <div style="clear:both; height:25px;"></div>
                 <input class="buttonsmally" type="button" value="Add to Favorite" onclick="insertMyquestion(); favorite_ctrl();"></input>
                 <div style="clear:both; height:30px;"></div>
@@ -219,12 +244,12 @@
    	</div>
 </div></div>
 <div class="toolboxcon"><div class="container">
-        <div class="toolboxbutL" style="background:#c33; color:#fff;"><span style="font-size:22px; font-weight:bold;" id="number">01</span>&nbsp; <span style="font-size:10px">Section </span><span style="font-size:10px;" id="section">1</span>&nbsp; <span style="font-size:10px;" id="label11" > Label 01</span></div>
+        <div class="toolboxbutLlabel" id="toolboxbutLlabel" style="background:#3389ca; color:#fff;" name="toolboxquestionlabel"><div style="position:relative; left:0px; text-align:left; "><span style="font-size:22px; font-weight:bold;" id="number" ><span style="font-size:18px; font-weight:400;">Select a Question</span></span></div><div style="position:relative; top:-30px; left:30px; line-height:11px; text-align:left; padding-right:30px;"><span style="font-size:10px;" id="section"></span>&nbsp; <br><span style="font-size:10px;" id="label11" ></span></div></div>
     <div class="toolboxbutL" onclick="prevquestion()">Prev</div>
     <div class="toolboxbutL" onclick="nextquestion()">Next</div>
     <div class="toolboxbutL" id="originaltextbutton" onclick="originaltext_ctrl();">Original Text</div>
-    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;"><i class="icon-plus-circled"></i> Favorite</span></div>
-    <div class="toolboxbutR">Extended Reading</div>
+    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;">★ Favorite</span></div>
+    <div class="toolboxbutR" id="extendedreadingbutton" onclick="extendedreading_ctrl()">Extended Reading</div>
     <div class="toolboxbutR" >Vocabulary</div>
     <div class="toolboxbutR" id="passageanalysisbutton" onclick="passageanalysis_ctrl()">Passage Analysis</div>
 </div></div>
@@ -252,7 +277,7 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
 				var itemval= "";
 				var sectionval= "";
 				var questionval= "";
-                var questionval0= 0;
+                                var questionval0= 0
 			 </script>
              	<!--item start-->
 				<div id="itemnavigate"></div>
@@ -272,7 +297,7 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
              </div>
        
         
-              <div id="textscrollbar" style="display:none;">
+              <div id="textscrollbar" style="display:none; font-family:georgia;">
 		<div class="scrollbar" id="scrollbarcon"><div class="track" id="scrollbartrack"><div class="thumb"><div class="end"></div></div></div></div>
 		<div class="viewport" id="viewport">
 		<div class="overview" id="overview"></div>               
@@ -292,8 +317,20 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
             </div>
         </div>
     </div></div></div>
-    
-    </section>
+</section>
+{else}
+<div id="indexbgimg" style="position:absolute; background:url(/{$APPNAME}/img/slider/slider0.jpg) center center no-repeat; background-size:cover; width:100%; height:100%;">
+	<div class="container" style="padding-top:15%;">
+    	<div style="float:right; width:380px; color:#fff;">
+        	<div style="font-size:40px; font-weight:400; line-height:42px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">An Integrated <br>SAT Review Platform</div>
+            <div style="font-size:20px; font-weight:400; line-height:26px; padding-top:20px; color:#fff; text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);">SACH powers your review process by solving critical needs and providing never-imagined functions.</div>
+            <div style="clear:both; height:30px;"></div>
+            	<input class="buttonsmall" type="button" style="width:80%; background:#3389ca; -webkit-box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2); -moz-box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2); box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2);" value="Register Now!" onclick="loginexpandreg()" />
+			
+        </div>
+    </div>
+</div>
+{/if}
 <script type="text/javascript">  
 $("#loading").fadeOut("slow");
 </script>
@@ -305,6 +342,8 @@ $("#loading").fadeOut("slow");
                                                         
 <script>
 window.onload= resetheight() & ucpcontrol() & Navigate();
+
+
 </script>
                                                         
 

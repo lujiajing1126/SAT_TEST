@@ -4,7 +4,9 @@ function loadtiku(){
 	var qnumber=$("input.qnumber").val();
 	//alert(set);
         $(".questionlistitem").remove();
+		$(".questionlistitemcor").remove();
         $(".questionlistitemselected").remove();
+		$(".questionlistitemcorselected").remove();
         $("#questiontext").empty();
         $("#passageanalysistext").empty();
         $("#overview").empty();
@@ -13,6 +15,7 @@ function loadtiku(){
         $("#label11").empty();
         $(".questioncontrol").remove();
         $(".questionlistexp").remove();
+		
         
 	$.post("/SAT_TEST/explan/question",{ "set": set,"section":section,"qnumber":qnumber}, 
         function(data){
@@ -23,24 +26,28 @@ function loadtiku(){
         		var section=value.section;
                         var category=value.category;
                         var questionid=value.questionid;
+						var toolboxbutLlabel= document.getElementById("toolboxbutLlabel");
+					toolboxbutLlabel.name=category;
         	        $("#questiontext").html(questioncontent);
         	        $("#number").html(qnumber); 
-        	        $("#section").html(section); 
+        	        $("#section").html("Section " + section); 
                         $("#label11").html(category); 
                         $("#returnquestionid").attr("value",questionid);
+						resettoolbarlabelcolor();
                         //$("#returnquestionid").text();
                 });
                 $.each(data.choices,function(i,item){
                         
-                        if(item.answer==1){
+                        if(item.answer){
                         $("#questionanalysis").append(
-                                "<div class=\"questionlistitem\" id=\"questionlistitem"+i+"\">"+
+                                "<div class=\"questionlistitemcor\" id=\"questionlistitemcor\">"+
                                 "<div class=\"questioncorrect\">√</div>"+
-                                "<div class=\"questioncontrol\"  id=\"questioncontrol"+i+"1\" onclick=\"questionlistexpand"+i+"1() & resetheight()\" style=\"display:inline;\">+</div>"+
-                                "<div class=\"questioncontrol\" id=\"questioncontrol"+i+"2\" onclick=\"questionlistexpand"+i+"2() & resetheight()\" style=\"display:none;\">-</div>"+
+                                "<div class=\"questioncontrol\"  id=\"questioncontrolcor1\" onclick=\"questionlistexpandcor1() & resetheight()\" style=\"display:inline;\">+</div>"+
+                                "<div class=\"questioncontrol\" id=\"questioncontrolcor2\" onclick=\"questionlistexpandcor2() & resetheight()\" style=\"display:none;\">-</div>"+
                                 "<div class=\"questionlisttext\">"+item.choice+"</div>"+
-                                "<div class=\"questionlistexp\" id=\"questionlistexp"+i+"\" style=\"height:0px; display:none;\">"+item.explanation+"</div>"+
+                                "<div class=\"questionlistexp\" id=\"questionlistexpcor\" style=\"height:0px; display:none;\">"+item.explanation+"</div>"+
                                 " <div style=\"clear:both;\"></div></div>"
+                                
                                 );
                         }else{
                         $("#questionanalysis").append(
@@ -57,8 +64,10 @@ function loadtiku(){
                 $.each(data.essays,function(i,value){
                         var essaycontent=value.essay;
         		var essayexplan=value.explanation;
+                        var extendreading=value.extendreading;
         	        $("#overview").html(essaycontent); 
                         $("#passageanalysistext").html(essayexplan); 
+                        $("#overview3").html(extendreading);
                         resetheight();
                 });          
                 
@@ -182,6 +191,28 @@ questioncontrol2.style.display="none";
 questioncontrol1.style.display="inline";
 questionlistitem.className="questionlistitem"
 }
+function questionlistexpandcor1() {
+var questionlistexp= document.getElementById("questionlistexpcor");
+var questioncontrol1= document.getElementById("questioncontrolcor1");
+var questioncontrol2= document.getElementById("questioncontrolcor2");
+var questionlistitem= document.getElementById("questionlistitemcor");
+questionlistexp.style.height="auto";
+questionlistexp.style.display="inline";
+questioncontrol1.style.display="none";
+questioncontrol2.style.display="inline";
+questionlistitem.className="questionlistitemcorselected"
+}
+function questionlistexpandcor2() {
+var questionlistexp= document.getElementById("questionlistexpcor");
+var questioncontrol1= document.getElementById("questioncontrolcor1");
+var questioncontrol2= document.getElementById("questioncontrolcor2");
+var questionlistitem= document.getElementById("questionlistitemcor");
+questionlistexp.style.height="0px";
+questionlistexp.style.display="none";
+questioncontrol2.style.display="none";
+questioncontrol1.style.display="inline";
+questionlistitem.className="questionlistitemcor"
+}
 
 
 
@@ -195,9 +226,9 @@ function getlist(){
                         "<div style=\"clear:both; height:0px;\"></div>"+
                         "<div class=\"favoritelistitem\" id=\"favoritelistitem"+i+"\">"+
                 	"<div class=\"favoritelistitemname\"onclick=\"rateitem"+i+"_1;\"value=\""+value.listid+"\">"+value.listname+"</div>"+
-                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\">○</div>"+
-                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\">○</div>"+
-                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\">○</div>"+
+                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\">☆</div>"+
+                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\">☆</div>"+
+                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\">☆</div>"+
                         "</div>"+
                         "<script>"+
 			"var favoritelistitem"+i+"= document.getElementById(\"favoritelistitem"+i+"\");\n"+
@@ -208,22 +239,22 @@ function getlist(){
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"1\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"●\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"★\";\n"+
                         "}\n"+
 			"rateitem"+i+"x2.onclick= function rateitem"+i+"_2() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"2\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"●\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"●\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"★\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"★\";\n"+
 			"}\n"+
 			"rateitem"+i+"x3.onclick= function rateitem"+i+"_3() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value= \""+value.listid+"\";\n"+
 			"priority.value= \"3\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"●\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"●\";\n"+
-			"rateitem"+i+"x3.innerHTML= \"●\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"★\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"★\";\n"+
+			"rateitem"+i+"x3.innerHTML= \"★\";\n"+
 			"}\n"+
 			"</script>"                       
                     );
@@ -313,14 +344,17 @@ function addlist(){
                                         function(data2){
                                            //alert(data2);
                                         $.each(data2,function(k,item2){
-                                                //alert(item2.qnumber) ;
-                                               // alert("qnumber="+k);
+                                               //alert(item2.category) ;
+                                               //alert("qnumber="+k);
+											   //alert(\""+value.category+"\");
                                                 $("#archivequestioncon"+i+j).append(
                                                      
-                                                     "<div class=\"archivequestion\" id=\"questionnumber"+i+j+k+"\" name=\"archivequestion"+i+j+"\" style=\"background:#c33;\" onclick=\"questionval=this.innerHTML; questionclick();loadtiku(); getquestionlength"+i+j+"()\">"+item2.qnumber+"</div>"
-                                                    );    
+                                                     "<div class=\"archivequestion\" id=\"questionnumber"+i+j+k+"\" name=\"archivequestion"+i+j+"\" title=\""+item2.category+"\" style=\"background:#3389ca;\" onclick=\"questionval=this.innerHTML; questionclick();loadtiku(); getquestionlength"+i+j+"()\">"+item2.qnumber+"</div><script>var archivelabel= document.getElementById(\"questionnumber"+i+j+k+"\"); </script>"
+                                                    );
+													resetarchivelabelcolor(); 
                                                 
-                                       });  
+                                       }); 
+									   
                                        $("#archivesectionscript"+i+j).append(
                                    "<script>\n"+
                                    "function getquestionlength"+i+j+"() {\n"+
@@ -332,6 +366,7 @@ function addlist(){
                                        );
                                      },"json");          
                                  
+								 
                                     
                                     
                               });      
@@ -354,4 +389,123 @@ function addlist(){
 }
 
 
+function resetlabelcolor() {
+	var ucpquestionlabel= document.getElementsByName("questionlabel");
+	var toolbarquestionlabel= document.getElementById("toolboxbutLlabel");
+	for (var i=0;i<ucpquestionlabel.length;i++) {
+		switch (ucpquestionlabel.item(i).innerHTML) {
+		case "Direct Inference":
+			ucpquestionlabel.item(i).style.background= "#E1634A";
+		break;
+		case "Comprehensive Reasoning":
+			ucpquestionlabel.item(i).style.background= "#FBAA7D";
+		break;
+		case "Attitude &amp; Tone":
+			ucpquestionlabel.item(i).style.background= "#003146";
+		break;
+		case "Understanding &amp; Reasoning":
+			ucpquestionlabel.item(i).style.background= "#4E84A6";
+		break;
+		case "Paired Passage Correlation":
+			ucpquestionlabel.item(i).style.background= "#025373";
+		break;
+		case "Primary Purpose":
+			ucpquestionlabel.item(i).style.background= "#509EAA";
+		break;
+		case "Vocabulary in Context":
+			ucpquestionlabel.item(i).style.background= "#6DA68B";
+		break;
+		case "Segment Function":
+			ucpquestionlabel.item(i).style.background= "#3F735B";
+		break;
+		case "Writting Strategy":
+			ucpquestionlabel.item(i).style.background= "#8AB0BF";
+		break;
+		case "Analogy &amp; Hypothetical Reasoning":
+			ucpquestionlabel.item(i).style.background= "#026873";
+		break;
+		}
+	}
+}
 
+function resettoolbarlabelcolor() {
+	switch (toolboxbutLlabel.name) {
+		case "Direct Inference":
+			toolboxbutLlabel.style.background= "#E1634A";
+		break;
+		case "Comprehensive Reasoning":
+			toolboxbutLlabel.style.background= "#FBAA7D";
+		break;
+		case "Attitude & Tone":
+			toolboxbutLlabel.style.background= "#003146";
+		break;
+		case "Understanding & Reasoning":
+			toolboxbutLlabel.style.background= "#4E84A6";
+		break;
+		case "Paired Passage Correlation":
+			toolboxbutLlabel.style.background= "#025373";
+		break;
+		case "Primary Purpose":
+			toolboxbutLlabel.style.background= "#509EAA";
+		break;
+		case "Vocabulary in Context":
+			toolboxbutLlabel.style.background= "#6DA68B";
+		break;
+		case "Segment Function":
+			toolboxbutLlabel.style.background= "#3F735B";
+		break;
+		case "Writting Strategy":
+			toolboxbutLlabel.style.background= "#8AB0BF";
+		break;
+		case "Analogy & Hypothetical Reasoning":
+			toolboxbutLlabel.style.background= "#026873";
+		break;
+		}
+}
+
+function resetarchivelabelcolor() {
+	switch (archivelabel.title) {
+		case "Direct Inference":
+			archivelabel.style.background= "#E1634A";
+		break;
+		case "Comprehensive Reasoning":
+			archivelabel.style.background= "#FBAA7D";
+		break;
+		case "Attitude & Tone":
+			archivelabel.style.background= "#003146";
+		break;
+		case "Understanding & Reasoning":
+			archivelabel.style.background= "#4E84A6";
+		break;
+		case "Paired Passage Correlation":
+			archivelabel.style.background= "#025373";
+		break;
+		case "Primary Purpose":
+			archivelabel.style.background= "#509EAA";
+		break;
+		case "Vocabulary in Context":
+			archivelabel.style.background= "#6DA68B";
+		break;
+		case "Segment Function":
+			archivelabel.style.background= "#3F735B";
+		break;
+		case "Writting Strategy":
+			archivelabel.style.background= "#8AB0BF";
+		break;
+		case "Analogy & Hypothetical Reasoning":
+			archivelabel.style.background= "#026873";
+		break;
+		}
+}
+
+//#003146;
+//#4E84A6;
+//#025373;
+//#026873;
+//#509EAA;
+//#6DA68B;
+//#3F735B;
+//#8AB0BF;
+	
+//#E1634A;
+//#FBAA7D;

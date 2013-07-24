@@ -28,6 +28,7 @@
     };
     function appendNav() {
     	$(".holder").empty();
+    	$(".holder").append('<div><a class="mpage_refresh arrow" onclick="loadrightcol2();loadlist();">F5</a></div>');
     	if(allpage!=0 && allpage !=1)  {
     		$(".holder").append('<a class="mpage_prev arrow">prev</a>');
     	}

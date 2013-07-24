@@ -36,10 +36,9 @@ class Query  {
 		if ($list != null || $list!='') {
 			$sqladd = " And myquestion.listid = :list";
 		}
-		$sql = "SELECT DISTINCT myquestion.userid,myquestion.addtime,myquestion.listid,myquestion.priority,myquestion.questionid,question.questionid,question.essayid,question.question,question.`set`,question.section,question.qnumber,question.category FROM myquestion ,question WHERE myquestion.userid = :name AND question.questionid = myquestion.questionid".$sqladd." ORDER BY :order ASC";
+		$sql = "SELECT DISTINCT myquestion.userid,myquestion.addtime,myquestion.listid,myquestion.priority,myquestion.questionid,question.questionid,question.essayid,question.question,question.`set`,question.section,question.qnumber,question.category FROM myquestion ,question WHERE myquestion.userid = :name AND question.questionid = myquestion.questionid".$sqladd." ORDER BY ".$order." ASC";
 		$stt = $this->_db->prepare($sql);
 		$stt->bindParam(':name', $req["name"]);
-		$stt->bindParam(':order', $order);
 		if ($list != NULL) {
 			$stt->bindParam(':list', $list);;
 		}

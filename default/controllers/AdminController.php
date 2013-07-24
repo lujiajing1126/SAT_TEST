@@ -5,6 +5,10 @@ require_once  APPLICATION_PATH.'/models/expl.tool.class.php';
 require_once  APPLICATION_PATH.'/models/words.class.php';
 
 class AdminController extends Zend_Controller_Action{
+	function indexAction()  {
+		$s = new MySmarty();
+		$s->display('admin/index.tpl');
+	}
     
     //整个添加管理部分按照这样的套路，添加文章和添加题目，添加题目则分为两个部分
     //首先判断选择的文章存不存在，如果存在则添加题目并添加文章的ID；否则直接添加题目；
@@ -14,7 +18,7 @@ class AdminController extends Zend_Controller_Action{
         $view->title = "添加题目";     
         
         $view->setScriptPath('./default/views/admin');//设置模板显示路径
-        echo $view->render('admin.phtml');//转发到explan.phtml模板  
+        echo $view->render('admin.phtml');//转发到explan.phtml模板 
     }
     
     function passageAction(){

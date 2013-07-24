@@ -27,6 +27,7 @@ function loadctb() {//不刷新错题本列表获得新的错题列表
 
 
 function loadlist() {//获取错题本列表
+	$(".myuserlist").empty();
 	var tlist = "";
 	$.post("/SAT_TEST/query/showlist",{},function(data) {
 		$.each(data,function(n, value) {

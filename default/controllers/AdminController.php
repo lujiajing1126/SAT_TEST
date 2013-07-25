@@ -399,6 +399,11 @@ class AdminController extends Zend_Controller_Action{
         
     }
     
+    function editessayAction()  {
+    	$s = new MySmarty();
+    	$s->display('admin/editessay.tpl');
+    }
+    
 }
 
 /*

@@ -51,12 +51,25 @@
         }
       }   
     </script>
+<script>
+function questioncontrol()
+{
+        if (window.event.keyCode==37)
+        {
+        prevquestion();
+        }
+        if(window.event.keyCode==39)
+        {
+        nextquestion();
+        }
+}
+</script>
 
 </head>
 
-<body>
+<body onkeydown=questioncontrol()>
 <!--<body oncontextmenu="return false" >-->
-    <div class="popupbackground" id="popupbg0" style="height:0px;">
+    <div class="popupbackground" id="popupbg0" style="height:0px;" onclick="extendedreading_ctrl()">
 	<div class="popupcontainer" id="popupcontainer0">
     	<div id="extreadingcontainer">
 		<div class="scrollbar" id="scrollbarcon3"><div class="track" id="scrollbartrack3"><div class="thumb"><div class="end"></div></div></div></div>
@@ -122,7 +135,7 @@
 		</div>
 		<div class="navcontainer" id="navcon">
 			<div class="container" style="z-index: 3;">
-				<div class="navLogo" onclick="setindexbgimg()">
+				<div class="navLogo" onclick="toolbarclear()">
 					<img src="/{$APPNAME}/img/logo_beta.png" />
 				</div>
 				<!--调试信息：{$information}-->
@@ -139,7 +152,7 @@
 				<div class="navbut">
 					<li>SACH DOCS</li>
 				</div>
-				<div class="navbut" >
+				<div class="navbut" onclick="toolbarclear()">
 					<li>HOME</li>
 				</div>
 				<div style="clear: both"></div>
@@ -166,9 +179,9 @@
 				</div>
 				<div class="registerbox" id="registerbox" style="height: 40px;">
 					<div class="logincaption" id="caption1" style="display: inline;"
-						onclick="registerexpand()">Do not have a account?</div>
+						onclick="registerexpand()">Do not have an account?</div>
 					<div class="logincaption" id="caption2" style="display: none;"
-						onclick="registerhide()">Already have a account?</div>
+						onclick="registerhide()">Already have an account?</div>
 					<div class="container"
 						style="width: 80%; padding-top: 80px; line-height: 12px;">
 						<form name="login" action="/{$APPNAME}/auth/register">
@@ -244,7 +257,7 @@
    	</div>
 </div></div>
 <div class="toolboxcon"><div class="container">
-        <div class="toolboxbutLlabel" id="toolboxbutLlabel" style="background:#3389ca; color:#fff;" name="toolboxquestionlabel"><div style="position:relative; left:0px; text-align:left; "><span style="font-size:22px; font-weight:bold;" id="number" ><span style="font-size:18px; font-weight:400;">Select a Question</span></span></div><div style="position:relative; top:-30px; left:30px; line-height:11px; text-align:left; padding-right:30px;"><span style="font-size:10px;" id="section"></span>&nbsp; <br><span style="font-size:10px;" id="label11" ></span></div></div>
+        <div class="toolboxbutLlabel" id="toolboxbutLlabel" style="background:#3389ca; color:#fff;" name="toolboxquestionlabel" onclick="toolbarclear();"><div style="position:relative; left:0px; text-align:left; "><span style="font-size:22px; font-weight:bold;" id="number" ><span style="font-size:18px; font-weight:400;">Select a Question</span></span></div><div style="position:relative; top:-30px; left:30px; line-height:11px; text-align:left; padding-right:30px;"><span style="font-size:10px;" id="section"></span>&nbsp; <br><span style="font-size:10px;" id="label11" ></span></div></div>
     <div class="toolboxbutL" onclick="prevquestion()">Prev</div>
     <div class="toolboxbutL" onclick="nextquestion()">Next</div>
     <div class="toolboxbutL" id="originaltextbutton" onclick="originaltext_ctrl();">Original Text</div>
@@ -306,7 +319,7 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
         
     	<div class="questionrightcon" id="questionrightcon">
             <div id="questionanalysis">
-            <div style="clear:both; height:20px;"></div>
+            
             <div id="questiontext" class="questiontext"></div>
             <div style="clear:both; height:20px;"></div>
             </div>
@@ -328,12 +341,44 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
             	<input class="buttonsmall" type="button" style="width:80%; background:#3389ca; -webkit-box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2); -moz-box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2); box-shadow:0px 0px 4px 1px rgba(0,0,0,0.2);" value="Register Now!" onclick="loginexpandreg()" />
 			
         </div>
+        <div style="clear:both; height:10px"></div>
     </div>
 </div>
+<div style="position:relative;clear:both; height:650px"></div>
 {/if}
+
+<section name="footer">
+<div style="clear:both; height:10px"></div>
+<div class="footer" style="font-size:12px;">
+	<div class="container">
+		<div style="float:left; width:30%; text-align:center;">
+    		<span style="font-size:24px; font-weight:bold; line-height:20px;">SACH<br><br></span><span style="font-size:14px; line-height:24px;">SACH is an integrated SAT review platform that aims to provide essential support, optimize study efficiency and revolutionize preparation method for those who long for excellence.</span>
+    	</div>
+        <div style="float:right; width:18%; padding:0 2% 0 2%; border-left:1px solid #999; text-align:center;">
+    		<span style="font-size:24px; font-weight:bold; line-height:20px;">Join!<br><br></span><span style="font-size:14px; line-height:24px;">Inspired by SACH’s endeavor and hope to join? Enjoy flexible working pace and terrific working environment! Email us at <strong><em>info@sachme.com</em></strong>.</span>
+    	</div>
+        <div style="float:right; width:18%; padding:0 2% 0 2%; border-left:1px solid #999; text-align:center;">
+    		<span style="font-size:24px; font-weight:bold; line-height:20px;">Terms<br><br></span><span style="font-size:14px; line-height:24px;">All content in this site may not be copied, reproduced, republished, distributed, or used for the creation of derivative works without SACH's prior written consent.</span>
+    	</div>
+        <div style="float:right; width:18%; padding:0 2% 0 2%; border-left:1px solid #999; text-align:center;">
+    		<span style="font-size:24px; font-weight:bold; line-height:20px;">Talk to us<br><br></span><span style="font-size:14px; line-height:24px;">Any talk about website content or function? Email us at <strong><em>info@sachme.com</em></strong>.<br><br><br></span>
+    	</div>
+        
+	</div>
+</div>
+<div class="subfooter">
+	<div class="container" style="line-height:35px;">
+    	<div style="float:right;">© 2013 SACH. All Rights Reserved.</div>
+        <div style="float:left;">info@sachme.com</div>
+    </div>
+</div>
+
+</section>
+
 <script type="text/javascript">  
 $("#loading").fadeOut("slow");
 </script>
+
 </body>
                                                         
 <!--<div id="script">

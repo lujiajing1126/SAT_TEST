@@ -27,9 +27,6 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 $front->registerPlugin(new AuthPlugin());
 $front->registerPlugin(new AclPlugin($rules));
 
-
-
-
 $front->setParam('noViewRenderer',TRUE);
 $front->dispatch();
 ?>

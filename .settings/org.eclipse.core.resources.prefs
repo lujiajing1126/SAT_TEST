@@ -9,6 +9,7 @@ encoding//default/controllers/ExplanController.php=UTF-8
 encoding//default/controllers/IndexController.php=UTF-8
 encoding//default/controllers/ListController.php=UTF-8
 encoding//default/controllers/MyquestionController.php=UTF-8
+encoding//default/controllers/QueryController.php=UTF-8
 encoding//default/models/Index.class.php=UTF-8
 encoding//default/models/Register.class.php=UTF-8
 encoding//default/models/customErrorHandler.php=UTF-8

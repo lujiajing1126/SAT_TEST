@@ -239,9 +239,9 @@ function getlist(){
                         "<div style=\"clear:both; height:0px;\"></div>"+
                         "<div class=\"favoritelistitem\" id=\"favoritelistitem"+i+"\">"+
                 	"<div class=\"favoritelistitemname\"onclick=\"rateitem"+i+"_1;\"value=\""+value.listid+"\">"+value.listname+"</div>"+
-                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
-                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
-                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
+                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
+                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
+                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
                         "</div>"+
                         "<script>"+
 			"var favoritelistitem"+i+"= document.getElementById(\"favoritelistitem"+i+"\");\n"+
@@ -252,22 +252,22 @@ function getlist(){
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"1\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
                         "}\n"+
 			"rateitem"+i+"x2.onclick= function rateitem"+i+"_2() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"2\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"<i class='icon-star'></i>\";\n"+
 			"}\n"+
 			"rateitem"+i+"x3.onclick= function rateitem"+i+"_3() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value= \""+value.listid+"\";\n"+
 			"priority.value= \"3\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x3.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x3.innerHTML= \"<i class='icon-star'></i>\";\n"+
 			"}\n"+
 			"</script>"                       
                     );
@@ -276,6 +276,7 @@ function getlist(){
             $("#listname");
         },"json");
 }
+
 
 
 function insertMyquestion(){

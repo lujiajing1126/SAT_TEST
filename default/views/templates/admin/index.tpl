@@ -2,12 +2,12 @@
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <TITLE>Administrator's Control Panel</TITLE>
-<link href="/SAT_TEST/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/SAT_TEST/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="/SAT_TEST/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="/SAT_TEST/css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
 <link href="/SAT_TEST/css/admin.css" rel="stylesheet" />
 <script src="/SAT_TEST/js/lib/jquery.min.js"></script>
-<script src="/SAT_TEST/js/bootstrap.js"></script>
+<script src="/SAT_TEST/js/lib/bootstrap.js"></script>
 <script src="/SAT_TEST/public/tinymce/tinymce.min.js"></script>
 </HEAD>
 <body>

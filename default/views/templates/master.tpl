@@ -211,7 +211,7 @@ function questioncontrol()
 					var i=0;
 					function clearfavoriteselection() {
 						for (i=0;i<rateitem.length;i++){
-							rateitem.item(i).innerHTML= "☆";
+							rateitem.item(i).innerHTML= "<i class='icon-star-empty'></i>";
 						}
 					}
 				</script>
@@ -261,7 +261,7 @@ function questioncontrol()
     <div class="toolboxbutL" onclick="prevquestion()">Prev</div>
     <div class="toolboxbutL" onclick="nextquestion()">Next</div>
     <div class="toolboxbutL" id="originaltextbutton" onclick="originaltext_ctrl();">Original Text</div>
-    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;">★ Favorite</span></div>
+    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;"><i class='icon-star'></i> Favorite</span></div>
     <div class="toolboxbutR" id="extendedreadingbutton" onclick="extendedreading_ctrl()">Extended Reading</div>
     <div class="toolboxbutR" >Vocabulary</div>
     <div class="toolboxbutR" id="passageanalysisbutton" onclick="passageanalysis_ctrl()">Passage Analysis</div>

@@ -16,8 +16,6 @@ class MySmarty extends Smarty  {
 	public function simpleDisplay($req,$infos)  {
 		$name = $req->getControllerName().'/'.$req->getActionName().'.tpl';
 		$this->assign('information',$infos);
-		//$this->assign('current', $name);
-		//$this->assign('base', $req->getBaseUrl());
 		$this->display('master.tpl');
 	}
 	

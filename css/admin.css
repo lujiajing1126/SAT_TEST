@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+/* Add additional stylesheets below
+-------------------------------------------------- */
+/*
+  Bootstrap's documentation styles
+  Special styles for presenting Bootstrap's documentation and examples
+*/
+
+/* Body and structure
+-------------------------------------------------- */
+body  {
+position: relative;
+padding-top: 40px;
+}
+input.fix-input  {
+height:30px;
+}

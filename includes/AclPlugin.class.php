@@ -7,6 +7,8 @@
 require_once 'Zend/Controller/Plugin/Abstract.php';
 require_once 'Zend/Acl.php';
 require_once 'Zend/Auth.php';
+require_once 'Zend/Exception.php';
+require_once './includes/CustomException.class.php';
 
 class AclPlugin extends Zend_Controller_Plugin_Abstract  {
 	protected $_acl;
@@ -27,16 +29,14 @@ class AclPlugin extends Zend_Controller_Plugin_Abstract  {
 			if($resource == 'Admin'|| $resource == 'Sat')  {
 				$role = strtolower($sess->roles);
 				if(!($this->_acl->isAllowed($role,$resource,'view')))  {
-					die("对不起您没有权限");
-				}
-				else  {
+					throw new Sat_Acl_Exception;
 				}
 			}			
 		}else  {
 			if($resource == 'Admin'||$resource == 'Sat')  {
 				$role = 'guest';
 				if(!$this->_acl->isAllowed($role,$resource,'view'))  {
-					die("对不起来宾，你没有权限！");
+					throw new Sat_Acl_Exception;
 				}
 			}
 		}

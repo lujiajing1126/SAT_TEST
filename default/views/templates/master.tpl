@@ -25,6 +25,9 @@
 <script type="text/javascript" src="/{$APPNAME}/js/ucpcontrol.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/colheightctrl.js"></script>
 <script type="text/javascript" src="/{$APPNAME}/js/ajax.js"></script>
+<script>
+
+</script>
 <!-- 运行js脚本 -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -69,8 +72,8 @@ function questioncontrol()
 
 <body onkeydown=questioncontrol()>
 <!--<body oncontextmenu="return false" >-->
-    <div class="popupbackground" id="popupbg0" style="height:0px;" onclick="extendedreading_ctrl()">
-	<div class="popupcontainer" id="popupcontainer0">
+    <div class="popupbackground" id="popupbg0" style="height:0px;" onclick="extendedreading_ctrl()"></div>
+	<div class="popupcontainer" id="popupcontainer0" style="z-index:5; display:none;">
     	<div id="extreadingcontainer">
 		<div class="scrollbar" id="scrollbarcon3"><div class="track" id="scrollbartrack3"><div class="thumb"><div class="end"></div></div></div></div>
 		<div class="viewport" id="viewport3">
@@ -81,7 +84,7 @@ function questioncontrol()
         </div>
         </div>
     </div>
-</div>
+
 
 <div id="loading"><div id="loading-gif"></div></div>
 	<div id="itemMenu" style="display: none">
@@ -121,8 +124,8 @@ function questioncontrol()
 							<div class="ucpusername">{$username}</div>
 						</div>
 						<div style="padding-top: 210px;">
-							<div class="ucpbutton2" onclick="loadctb()">My Folders</div>
-							<div class="ucpbutton" onclick="loadrightcol()">Manage My Account</div>
+							<div class="ucpbutton2" onclick="loadctb()"><i class="icon-folder"></i> My Folders</div>
+							<div class="ucpbutton" onclick="loadrightcol()"><i class="icon-menu"></i>Manage My Account</div>
 						</div>
 					</div>
 
@@ -135,7 +138,7 @@ function questioncontrol()
 		</div>
 		<div class="navcontainer" id="navcon">
 			<div class="container" style="z-index: 3;">
-				<div class="navLogo" onclick="toolbarclear()">
+				<div class="navLogo" onclick="toolbarclear(); showuserguide();">
 					<img src="/{$APPNAME}/img/logo_beta.png" />
 				</div>
 				<!--调试信息：{$information}-->
@@ -152,7 +155,7 @@ function questioncontrol()
 				<div class="navbut">
 					<li>SACH DOCS</li>
 				</div>
-				<div class="navbut" onclick="toolbarclear()">
+				<div class="navbut" onclick="toolbarclear(); showuserguide();">
 					<li>HOME</li>
 				</div>
 				<div style="clear: both"></div>
@@ -197,7 +200,7 @@ function questioncontrol()
 {if $flg eq TRUE}
 <section name="toolbox">
     
-    <div style="position:absolute; width:100%; padding-top:160px;"><div class="container">
+    <div style="position:fixed; width:100%; padding-top:160px; z-index:3;"><div class="container">
 	<div class="favoritecontainer" id="favoritecon" style="height:0px;">
             <div class="favoritebox" id="favoritebox">
            	
@@ -211,7 +214,7 @@ function questioncontrol()
 					var i=0;
 					function clearfavoriteselection() {
 						for (i=0;i<rateitem.length;i++){
-							rateitem.item(i).innerHTML= "☆";
+							rateitem.item(i).innerHTML= "<i class='icon-star-empty'></i>";
 						}
 					}
 				</script>
@@ -250,18 +253,18 @@ function questioncontrol()
                 </div>
 
                 <div style="clear:both; height:25px;"></div>
-                <input class="buttonsmally" type="button" value="Add to Favorite" onclick="insertMyquestion(); favorite_ctrl();"></input>
+                <input class="buttonsmally" type="button" value="Add to Favorite" onclick="insertMyquestion(); favorite_ctrl(); loadctb();"></input>
                 <div style="clear:both; height:30px;"></div>
             </div>
       	</div>
    	</div>
 </div></div>
 <div class="toolboxcon"><div class="container">
-        <div class="toolboxbutLlabel" id="toolboxbutLlabel" style="background:#3389ca; color:#fff;" name="toolboxquestionlabel" onclick="toolbarclear();"><div style="position:relative; left:0px; text-align:left; "><span style="font-size:22px; font-weight:bold;" id="number" ><span style="font-size:18px; font-weight:400;">Select a Question</span></span></div><div style="position:relative; top:-30px; left:30px; line-height:11px; text-align:left; padding-right:30px;"><span style="font-size:10px;" id="section"></span>&nbsp; <br><span style="font-size:10px;" id="label11" ></span></div></div>
+        <div class="toolboxbutLlabel" id="toolboxbutLlabel" style="background:#3389ca; color:#fff;" name="toolboxquestionlabel" onclick="toolbarclear(); showuserguide();"><div style="position:relative; left:0px; text-align:left; "><span id="labelnull" style="font-size:18px; font-weight:400;">Select a Question</span><span style="font-size:22px; font-weight:bold;" id="number" ></span></div><div style="position:relative; top:-30px; left:30px; line-height:11px; text-align:left; padding-right:30px;"><span style="font-size:10px;" id="section"></span>&nbsp; <br><span style="font-size:10px;" id="label11" ></span></div></div>
     <div class="toolboxbutL" onclick="prevquestion()">Prev</div>
     <div class="toolboxbutL" onclick="nextquestion()">Next</div>
     <div class="toolboxbutL" id="originaltextbutton" onclick="originaltext_ctrl();">Original Text</div>
-    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;">★ Favorite</span></div>
+    <div class="toolboxbutR" id="favoritebutton" style="background:#ffdb17; color:#333;" onclick="getlist() & favorite_ctrl();"><span style="font-size:18px;"><i class='icon-star'></i> Favorite</span></div>
     <div class="toolboxbutR" id="extendedreadingbutton" onclick="extendedreading_ctrl()">Extended Reading</div>
     <div class="toolboxbutR" >Vocabulary</div>
     <div class="toolboxbutR" id="passageanalysisbutton" onclick="passageanalysis_ctrl()">Passage Analysis</div>
@@ -319,7 +322,7 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
         
     	<div class="questionrightcon" id="questionrightcon">
             <div id="questionanalysis">
-            
+            <ol id="userguide" style="text-align:left; font-size:16px;"><li>Please use <span style="color:rgb(51, 137, 202)"><strong>Chrome Browser</strong> </span>to open this site. The website functions are not guaranteed to be viable by other web browsers.</li><br><li>Please be patient after your first log-in. The website engine requires much resource to process. Restart your browser if slow request respond affects your user experience</li><br><li>Click on <strong>Jan 2013</strong> to start your journey!</li><br><li>Create your personal wrong collections by clicking <span style="color:rgb(255, 215, 0)"><strong>Favorite</strong></span> on top right side. Hover on top blue column to view personal records.</li><br><li>Meet an error? Ask <span style="color:rgb(51, 137, 202)"><strong>info@sachme.com</strong></span> for any support!</li></ol>
             <div id="questiontext" class="questiontext"></div>
             <div style="clear:both; height:20px;"></div>
             </div>
@@ -344,9 +347,9 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
         <div style="clear:both; height:10px"></div>
     </div>
 </div>
-<div style="position:relative;clear:both; height:650px"></div>
+<div style="position:relative;clear:both; height:650px; z-index:-1;"></div>
 {/if}
-
+{if $flg eq TRUE}
 <section name="footer">
 <div style="clear:both; height:10px"></div>
 <div class="footer" style="font-size:12px;">
@@ -374,6 +377,7 @@ SECTION<input type="text" class="section" id="inputsectionnum" value="0"/>
 </div>
 
 </section>
+{/if}
 
 <script type="text/javascript">  
 $("#loading").fadeOut("slow");
@@ -386,7 +390,52 @@ $("#loading").fadeOut("slow");
 </div>-->
                                                         
 <script>
-window.onload= resetheight() & ucpcontrol() & Navigate();
+function ColminHeight() {
+	var leftcol= document.getElementById("questionleftcon");
+	var rightcol= document.getElementById("questionrightcon");
+	var resetminHeight= window.innerHeight-240+"px";
+	leftcol.style.minHeight= resetminHeight;
+	rightcol.style.minHeight= resetminHeight;
+}
+function showpriority() {
+var itempriority= document.getElementsByName("itempriority");
+for (i=0;i<itempriority.length;i++){
+	switch (itempriority.item(i).innerHTML) {
+		case "1":
+			itempriority.item(i).innerHTML= "<i class='icon-star'></i>"; 
+		break;
+		case "2":
+			itempriority.item(i).innerHTML= "<i class='icon-star'></i><i class='icon-star'></i>";
+		break;
+		case "3":
+			itempriority.item(i).innerHTML= "<i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>";
+		break;
+	}
+}
+}
+function showuserguide() {
+	var userguide= document.getElementById("userguide");
+	userguide.innerHTML="<li>Please use <span style='color:rgb(51, 137, 202)'><strong>Chrome Browser</strong> </span>to visit this site. The website functions are not guaranteed to be viable by other web browsers.</li><br><li>Please be patient after your first log-in. The website engine requires much resource to process. Restart your browser if slow request respond affects your user experience</li><br><li>Click on <strong>Jan 2013</strong> to start your journey!</li><br><li>Create your personal wrong collections by clicking <span style='color:rgb(255, 215, 0)'><strong>Favorite</strong></span> on top right side. Hover on top blue column to view personal records.</li><br><li>Meet an error? Ask <span style='color:rgb(51, 137, 202)'><strong>info@sachme.com</strong></span> for any support!</li>";
+		$(".questionlistitem").remove();
+		$(".questionlistitemcor").remove();
+        $(".questionlistitemselected").remove();
+		$(".questionlistitemcorselected").remove();
+        $("#questiontext").empty();
+        $("#passageanalysistext").empty();
+        $("#overview").empty();
+        $("#number").empty();
+        $("#section").empty();
+        $("#label11").empty();
+        $(".questioncontrol").remove();
+        $(".questionlistexp").remove();
+		toolboxbutLlabel.style.background= "#3389ca";
+		$("#number").html("");
+		$("#section").html("");
+		$("#label11").html("");
+		$("#labelnull").html("Select a Question");
+	resetheight();
+}
+window.onload=  ColminHeight() & resetheight() & ucpcontrol() & Navigate(); showuserguide();
 
 
 </script>

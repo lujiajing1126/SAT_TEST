@@ -91,10 +91,12 @@ var viewport3= document.getElementById("viewport3");
 if (popupbg0.style.height=="0px"){
 	popupbg0.style.height="100%";
 	button.className="toolboxbutRPed";
+	popupcontainer0.style.display="block";
 }
 else {
 	popupbg0.style.height="0px";
 	button.className="toolboxbutR";
+	popupcontainer0.style.display="none";
 }
 viewport3.style.height= popupcontainer0.offsetHeight-60+"px";
 $('#extreadingcontainer').tinyscrollbar();	

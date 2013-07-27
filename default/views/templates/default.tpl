@@ -11,7 +11,8 @@
 			<li>Priority</li>
 			<div style="height: 10px; clear: both;"></div>
 		</div>
-		<div class="holder"></div>
+		<div class="holder">
+		</div>
 	</div>
 </div>
 <!-- 错题序列 -->

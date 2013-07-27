@@ -2,7 +2,6 @@
 <buildpath>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path=""/>
-	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/Smarty"/>
-	<buildpathentry kind="con" path="org.zend.php.framework.v2.CONTAINER"/>
-	<buildpathentry kind="con" path="org.zend.php.framework.CONTAINER"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/org.eclipse.php.core.PHPNature#Zend Framework 1"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/org.eclipse.php.core.PHPNature#Smarty"/>
 </buildpath>

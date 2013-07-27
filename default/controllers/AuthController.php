@@ -14,12 +14,6 @@ require_once 'Zend/Http/Client.php';
 
 
 class AuthController extends Zend_Controller_Action  {
-public function indexAction(){
-		$s = new MySmarty();
-		$s->Display('auth/index.tpl');
-	}
-	
-	
 public function processAction(){
 		$req = $this->getRequest();
 		$s = new MySmarty();

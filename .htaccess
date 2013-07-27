@@ -1,3 +1,3 @@
 RewriteEngine on
 RewriteBase /SAT_TEST/
-RewriteRule !\.(js|ico|gif|jpg|png|css|xml|htm|html|swf)$ index.php
+RewriteRule !\.(js|ico|gif|jpg|png|css|xml|htm|html|swf|svg|woff|ttf|eot|md|map)$ index.php

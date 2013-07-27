@@ -7,6 +7,7 @@ function loadtiku(){
 		$(".questionlistitemcor").remove();
         $(".questionlistitemselected").remove();
 		$(".questionlistitemcorselected").remove();
+		$("#labelnull").empty();
         $("#questiontext").empty();
         $("#passageanalysistext").empty();
         $("#overview").empty();
@@ -15,6 +16,7 @@ function loadtiku(){
         $("#label11").empty();
         $(".questioncontrol").remove();
         $(".questionlistexp").remove();
+		$("#userguide").empty();
 		
         
 	$.post("/SAT_TEST/explan/question",{ "set": set,"section":section,"qnumber":qnumber}, 
@@ -54,7 +56,7 @@ function loadtiku(){
                         $("#questionanalysis").append(
 								
                                 "<div class=\"questionlistitemcor\" id=\"questionlistitemcor\">"+
-                                "<div class=\"questioncorrect\">√</div>"+
+                                "<div class=\"questioncorrect\"><i class='icon-check' style='position:absolute; left:5px; top:8px;'></i></div>"+
                                 "<div class=\"questioncontrol\"  id=\"questioncontrolcor1\" onclick=\"questionlistexpandcor1() & resetheight()\" style=\"display:inline;\">+</div>"+
                                 "<div class=\"questioncontrol\" id=\"questioncontrolcor2\" onclick=\"questionlistexpandcor2() & resetheight()\" style=\"display:none;\">-</div>"+
                                 "<div class=\"questionlisttext\" onclick=\"questionlistexpandcor1() & resetheight()\">"+item.choice+"</div>"+
@@ -67,7 +69,7 @@ function loadtiku(){
                                 "<div class=\"questionlistitem\" id=\"questionlistitem"+i+"\">"+
                                 "<div class=\"questioncontrol\"  id=\"questioncontrol"+i+"1\" onclick=\"questionlistexpand"+i+"1() & resetheight()\" style=\"display:inline;\">+</div>"+
                                 "<div class=\"questioncontrol\" id=\"questioncontrol"+i+"2\" onclick=\"questionlistexpand"+i+"2() & resetheight()\" style=\"display:none;\">-</div>"+
-                                "<div class=\"questionlisttext\" onclick=\"questionlistexpandcor1() & resetheight()\">"+item.choice+"</div>"+
+                                "<div class=\"questionlisttext\" onclick=\"questionlistexpand"+i+"1() & resetheight()\">"+item.choice+"</div>"+
                                 "<div class=\"questionlistexp\" id=\"questionlistexp"+i+"\" style=\"height:0px; display:none;\">"+item.explanation+"</div>"+
                                 " <div style=\"clear:both;\"></div></div>"
                                 );
@@ -239,9 +241,9 @@ function getlist(){
                         "<div style=\"clear:both; height:0px;\"></div>"+
                         "<div class=\"favoritelistitem\" id=\"favoritelistitem"+i+"\">"+
                 	"<div class=\"favoritelistitemname\"onclick=\"rateitem"+i+"_1;\"value=\""+value.listid+"\">"+value.listname+"</div>"+
-                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
-                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
-                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\"><i class=\"icon-star-empty\"></i></div>"+
+                        "<div class=\"favoritelistitemrate3\" id=\"rateitem"+i+"_3\" onclick=\"rateitem"+i+"_3;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
+                        "<div class=\"favoritelistitemrate2\" id=\"rateitem"+i+"_2\" onclick=\"rateitem"+i+"_2;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
+                        "<div class=\"favoritelistitemrate1\" id=\"rateitem"+i+"_1\" onclick=\"rateitem"+i+"_1;\" name=\"favoritelistitemrate\"><i class='icon-star-empty'></i></div>"+
                         "</div>"+
                         "<script>"+
 			"var favoritelistitem"+i+"= document.getElementById(\"favoritelistitem"+i+"\");\n"+
@@ -252,22 +254,22 @@ function getlist(){
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"1\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
                         "}\n"+
 			"rateitem"+i+"x2.onclick= function rateitem"+i+"_2() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value=\""+value.listid+"\";\n"+
 			"priority.value= \"2\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"<i class='icon-star'></i>\";\n"+
 			"}\n"+
 			"rateitem"+i+"x3.onclick= function rateitem"+i+"_3() {\n"+
 			"clearfavoriteselection();\n"+
 			"foldername.value= \""+value.listid+"\";\n"+
 			"priority.value= \"3\";\n"+
-			"rateitem"+i+"x1.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x2.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
-			"rateitem"+i+"x3.innerHTML= \"<i class=\"icon-star\"></i>\";\n"+
+			"rateitem"+i+"x1.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x2.innerHTML= \"<i class='icon-star'></i>\";\n"+
+			"rateitem"+i+"x3.innerHTML= \"<i class='icon-star'></i>\";\n"+
 			"}\n"+
 			"</script>"                       
                     );
@@ -278,6 +280,7 @@ function getlist(){
 }
 
 
+
 function insertMyquestion(){
         var list=$("#foldername").val();
         var priority=$("#priority").val();
@@ -286,6 +289,7 @@ function insertMyquestion(){
         function(data){
             //alert(data);
         },"json");
+		
 }
 
 
@@ -295,6 +299,7 @@ function addlist(){
         function(data){
             //alert(data);
         },"json");
+		
 }
 
 

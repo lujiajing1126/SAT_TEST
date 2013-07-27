@@ -28,7 +28,7 @@
     };
     function appendNav() {
     	$(".holder").empty();
-    	$(".holder").append('<div><a class="mpage_refresh arrow" onclick="loadrightcol2();loadlist();">F5</a></div>');
+    	$(".holder").append('<div><a class="mpage_refresh arrow" onclick="loadrightcol2(0);"><i class="icon-arrows-ccw"></i></a></div>');
     	if(allpage!=0 && allpage !=1)  {
     		$(".holder").append('<a class="mpage_prev arrow">prev</a>');
     	}
@@ -95,16 +95,18 @@
         for (i = startrec; i <= endrec; i++) {
         	var trs = "";
 			trs += "<li><div class=\"ucplistitem\">";
-			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><div style=\"float:right;\">"+ jsonarray[i].addtime+ "</div></div>";
+			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><span>"+jsonarray[i].priority+"</span><div style=\"float:right;\">"+ jsonarray[i].addtime+ "</div></div>";
 			trs += "<div class=\"ucplistitemdate\">"+ jsonarray[i].set + "</div>";
 			trs += "<div class=\"ucplistitemlabel\" name=\"questionlabel\">"+ jsonarray[i].category+ "</div></div></li>";
 			tbody += trs;
         }
+        parent.empty();
         parent.append(tbody);
+        resetlabelcolor();
     };
 
     $.fn.mpage.defaults = {
         start: 1,
-        perpage: 11
+        perpage: 10
     };
 })(jQuery)

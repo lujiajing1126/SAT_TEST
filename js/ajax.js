@@ -27,6 +27,7 @@ function loadctb() {
 							resetlabelcolor();
 						});
 					}, "json");
+	showpriority();
 
 }
 
@@ -51,6 +52,7 @@ function loadlist() {
 			loadrightcol2(0);
 		});
 	}, "json");
+	showpriority();
 }
 
 /*
@@ -66,6 +68,7 @@ function loadrightcol() {
 			$("#roles").val(data[0].roles);
 		}, "json");
 	});
+	showpriority();
 }
 
 /*
@@ -93,7 +96,7 @@ function loadrightcol2(isChooseAll) {
 						$("#itemContainer").mpage({},data);
 						resetlabelcolor();
 					},"json");
-	
+	showpriority();
 }
 /*
  * name: loadlist2
@@ -118,6 +121,7 @@ function loadlist2() {
 			loadrightcol2(0);
 		});
 	}, "json");
+	showpriority();
 }
 //自动加载
 $(document).ready(function() {

@@ -28,7 +28,7 @@
     };
     function appendNav() {
     	$(".holder").empty();
-    	$(".holder").append('<div><a class="mpage_refresh arrow" onclick="loadrightcol2(0);"><i class="icon-arrows-ccw"></i></a></div>');
+    	$(".holder").append('<div><a class="mpage_refresh arrow" onclick="loadctb();showpriority();"><i class="icon-arrows-ccw" style="position:relative; top:8px;"></i></a></div>');
     	if(allpage!=0 && allpage !=1)  {
     		$(".holder").append('<a class="mpage_prev arrow">prev</a>');
     	}
@@ -86,6 +86,7 @@
     };
 
     $.fn.mpage.appendPerRec = function(page) {
+		
         var startrec = (page-1) * perpage
             ,endrec = startrec + perpage -1
             , i;
@@ -94,15 +95,29 @@
         var tbody="";
         for (i = startrec; i <= endrec; i++) {
         	var trs = "";
-			trs += "<li><div class=\"ucplistitem\">";
-			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><span>"+jsonarray[i].priority+"</span><div style=\"float:right;\">"+ jsonarray[i].addtime+ "</div></div>";
+			trs += "<script>";
+			trs += "function selectfavoriteitem"+i+"() {";
+			trs += "sectionval= \""+jsonarray[i].section+"\";";
+			trs += "questionval= \""+jsonarray[i].qnumber+"\";";
+			trs += "itemval= \""+jsonarray[i].set+"\";";
+			trs += "inputitemnum.value= itemval;";
+			trs += "inputsectionnum.value= sectionval;";
+			trs += "inputquestionnum.value= questionval;";
+			trs += "loadtiku();";
+			trs += "}";
+			trs += "</script>";
+			trs += "<li><div class=\"ucplistitem\" onclick=\"selectfavoriteitem"+i+"()\">";
+			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><div style=\"float:right; width:150px;\">"+ jsonarray[i].addtime+ "</div><div name=\"itempriority\" style=\"float:right; width:150px; text-align:left; padding-top:12px;\">"+jsonarray[i].priority+"</div></div>";
 			trs += "<div class=\"ucplistitemdate\">"+ jsonarray[i].set + "</div>";
 			trs += "<div class=\"ucplistitemlabel\" name=\"questionlabel\">"+ jsonarray[i].category+ "</div></div></li>";
 			tbody += trs;
+			
         }
+		
         parent.empty();
         parent.append(tbody);
         resetlabelcolor();
+		showpriority();
     };
 
     $.fn.mpage.defaults = {

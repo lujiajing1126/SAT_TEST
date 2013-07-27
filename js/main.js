@@ -7,6 +7,7 @@ function loadtiku(){
 		$(".questionlistitemcor").remove();
         $(".questionlistitemselected").remove();
 		$(".questionlistitemcorselected").remove();
+		$("#labelnull").empty();
         $("#questiontext").empty();
         $("#passageanalysistext").empty();
         $("#overview").empty();
@@ -15,6 +16,7 @@ function loadtiku(){
         $("#label11").empty();
         $(".questioncontrol").remove();
         $(".questionlistexp").remove();
+		$("#userguide").empty();
 		
         
 	$.post("/SAT_TEST/explan/question",{ "set": set,"section":section,"qnumber":qnumber}, 
@@ -54,7 +56,7 @@ function loadtiku(){
                         $("#questionanalysis").append(
 								
                                 "<div class=\"questionlistitemcor\" id=\"questionlistitemcor\">"+
-                                "<div class=\"questioncorrect\">√</div>"+
+                                "<div class=\"questioncorrect\"><i class='icon-check' style='position:absolute; left:5px; top:8px;'></i></div>"+
                                 "<div class=\"questioncontrol\"  id=\"questioncontrolcor1\" onclick=\"questionlistexpandcor1() & resetheight()\" style=\"display:inline;\">+</div>"+
                                 "<div class=\"questioncontrol\" id=\"questioncontrolcor2\" onclick=\"questionlistexpandcor2() & resetheight()\" style=\"display:none;\">-</div>"+
                                 "<div class=\"questionlisttext\" onclick=\"questionlistexpandcor1() & resetheight()\">"+item.choice+"</div>"+
@@ -67,7 +69,7 @@ function loadtiku(){
                                 "<div class=\"questionlistitem\" id=\"questionlistitem"+i+"\">"+
                                 "<div class=\"questioncontrol\"  id=\"questioncontrol"+i+"1\" onclick=\"questionlistexpand"+i+"1() & resetheight()\" style=\"display:inline;\">+</div>"+
                                 "<div class=\"questioncontrol\" id=\"questioncontrol"+i+"2\" onclick=\"questionlistexpand"+i+"2() & resetheight()\" style=\"display:none;\">-</div>"+
-                                "<div class=\"questionlisttext\" onclick=\"questionlistexpandcor1() & resetheight()\">"+item.choice+"</div>"+
+                                "<div class=\"questionlisttext\" onclick=\"questionlistexpand"+i+"1() & resetheight()\">"+item.choice+"</div>"+
                                 "<div class=\"questionlistexp\" id=\"questionlistexp"+i+"\" style=\"height:0px; display:none;\">"+item.explanation+"</div>"+
                                 " <div style=\"clear:both;\"></div></div>"
                                 );
@@ -287,6 +289,7 @@ function insertMyquestion(){
         function(data){
             //alert(data);
         },"json");
+		
 }
 
 
@@ -296,6 +299,7 @@ function addlist(){
         function(data){
             //alert(data);
         },"json");
+		
 }
 
 

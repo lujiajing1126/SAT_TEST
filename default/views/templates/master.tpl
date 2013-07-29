@@ -139,7 +139,7 @@ function questioncontrol()
 		<div class="navcontainer" id="navcon">
 			<div class="container" style="z-index: 3;">
 				<div class="navLogo" onclick="toolbarclear(); showuserguide();">
-					<img src="/{$APPNAME}/img/logo_beta.png" />
+					<img src="/{$APPNAME}/img/Logo_beta.png" />
 				</div>
 				<!--调试信息：{$information}-->
                                 {if $flg eq TRUE}

@@ -26,7 +26,7 @@ function loadtiku(){
                         questioncontent=value.question;
         		var qnumber=value.qnumber;
         		var section=value.section;
-                        var category=value.category;
+                        var category=$.trim(value.category);
                         var questionid=value.questionid;
 						var toolboxbutLlabel= document.getElementById("toolboxbutLlabel");
 					toolboxbutLlabel.name=category;
@@ -367,7 +367,7 @@ function addlist(){
 											   //alert(\""+value.category+"\");
                                                 $("#archivequestioncon"+i+j).append(
                                                      
-                                                     "<div class=\"archivequestion\" id=\"questionnumber"+i+j+k+"\" name=\"archivequestion"+i+j+"\" title=\""+item2.category+"\" style=\"background:#3389ca;\" onclick=\"questionval=this.innerHTML; questionclick();loadtiku(); getquestionlength"+i+j+"()\">"+item2.qnumber+"</div><script>var archivelabel= document.getElementById(\"questionnumber"+i+j+k+"\"); </script>"
+                                                     "<div class=\"archivequestion\" id=\"questionnumber"+i+j+k+"\" name=\"archivequestion"+i+j+"\" title=\""+$.trim(item2.category)+"\" style=\"background:#3389ca;\" onclick=\"questionval=this.innerHTML; questionclick();loadtiku(); getquestionlength"+i+j+"()\">"+item2.qnumber+"</div><script>var archivelabel= document.getElementById(\"questionnumber"+i+j+k+"\"); </script>"
                                                     );
 													resetarchivelabelcolor(); 
                                                 
@@ -436,7 +436,7 @@ function resetlabelcolor() {
 		case "Segment Function":
 			ucpquestionlabel.item(i).style.background= "#3F735B";
 		break;
-		case "Writting Strategy":
+		case "Writing Strategy":
 			ucpquestionlabel.item(i).style.background= "#8AB0BF";
 		break;
 		case "Analogy &amp; Hypothetical Reasoning":
@@ -472,7 +472,7 @@ function resettoolbarlabelcolor() {
 		case "Segment Function":
 			toolboxbutLlabel.style.background= "#3F735B";
 		break;
-		case "Writting Strategy":
+		case "Writing Strategy":
 			toolboxbutLlabel.style.background= "#8AB0BF";
 		break;
 		case "Analogy & Hypothetical Reasoning":
@@ -507,7 +507,7 @@ function resetarchivelabelcolor() {
 		case "Segment Function":
 			archivelabel.style.background= "#3F735B";
 		break;
-		case "Writting Strategy":
+		case "Writing Strategy":
 			archivelabel.style.background= "#8AB0BF";
 		break;
 		case "Analogy & Hypothetical Reasoning":

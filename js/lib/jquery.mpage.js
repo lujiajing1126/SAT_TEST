@@ -109,7 +109,7 @@
 			trs += "<li><div class=\"ucplistitem\" onclick=\"selectfavoriteitem"+i+"()\">";
 			trs += "<div class=\"ucplistitemtext\"><div style=\"float:left;\">Section "+ jsonarray[i].section+ " Question "+ jsonarray[i].qnumber+ "</div><div style=\"float:right; width:150px;\">"+ jsonarray[i].addtime+ "</div><div name=\"itempriority\" style=\"float:right; width:150px; text-align:left; padding-top:12px;\">"+jsonarray[i].priority+"</div></div>";
 			trs += "<div class=\"ucplistitemdate\">"+ jsonarray[i].set + "</div>";
-			trs += "<div class=\"ucplistitemlabel\" name=\"questionlabel\">"+ jsonarray[i].category+ "</div></div></li>";
+			trs += "<div class=\"ucplistitemlabel\" name=\"questionlabel\">"+ $.trim(jsonarray[i].category) + "</div></div></li>";
 			tbody += trs;
 			
         }

@@ -91,11 +91,11 @@ public function processAction(){
 							"grade"=>$req->getParam('Grade')
 					);
 					$reg->regNewUser($reqarray);
-					die("邀请码有效！");
+					die("邀请码有效！<BR><a href='/SAT_TEST'>返回主页</a>");
 				} else {
 					Form::setError("register", "Error: Invalid Invitation Code");
 					header("Location: ".vAPP_NAME."/auth/register");
-					die("邀请码无效！");
+					die("邀请码无效！请重新注册！");
 				}
 			}
 		}

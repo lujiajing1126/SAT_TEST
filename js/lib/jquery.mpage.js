@@ -1,9 +1,9 @@
 /**
-* jQuery mPage v0.3
+* jQuery mPage v0.4
 *
 * @Plugin Name: mPage
 * @author: megrez
-* @Update Time:Jul 23, 2013
+* @Update Time:Jul 30, 2013
 *
 * Copyright 2013 Megrez
 * Powered By jQuery

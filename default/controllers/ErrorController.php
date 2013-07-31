@@ -27,6 +27,28 @@ EOH;
                	$customhandler = new customErrorHandler();
                	$customhandler->customError($content);
         		exit();
+        	} elseif (preg_match("/Sat_Reg_Exception/", $file_content))  {
+        		$this->getResponse()->setHeader('Content-Type', "text/html;charset=utf-8");
+                		// application error
+                		$content =<<<EOH
+				<h1>Error!</h1>
+				<p>您已登录，请不要重复注册！</p>
+EOH;
+                $this->getResponse()->clearBody();
+               	$customhandler = new customErrorHandler();
+               	$customhandler->customError($content);
+        		exit();
+        	}  elseif (preg_match("/Sat_Auth_Exception/", $file_content))  {
+        		$this->getResponse()->setHeader('Content-Type', "text/html;charset=utf-8");
+                		// application error
+                		$content =<<<EOH
+				<h1>Error!</h1>
+				<p>您已登录，请不要重复登录！</p>
+EOH;
+                $this->getResponse()->clearBody();
+               	$customhandler = new customErrorHandler();
+               	$customhandler->customError($content);
+        		exit();
         	}
         	
         }

@@ -15,6 +15,8 @@ require_once 'Zend/Http/Client.php';
 
 class AuthController extends Zend_Controller_Action  {
 public function processAction(){
+		$sess = new Zend_Session_Namespace('satApp');
+		if (!$sess->isLogined) {
 		$req = $this->getRequest();
 		$s = new MySmarty();
 		if($req->getParam('user') != Null && $req->getParam('user') != '' && $req->getParam('passwd') != NULL && $req->getParam('passwd') != '')  {
@@ -27,7 +29,6 @@ public function processAction(){
 		if($result->isValid() && ($reg->authUser($req->getParam('user')) == 1)) {
 			$info = $auth->getResultRowObject(NULL, 'passwd');
 			$cookie = $reg->setAutologin($req->getParams(),$reg->getUid($req->getParam('user')));
-			$sess = new Zend_Session_Namespace('satApp');
 			$sess->isLogined = TRUE;
 			$sess->uid = $info->uid;
 			$sess->roles = $info->roles;
@@ -46,6 +47,7 @@ public function processAction(){
 			$s->assign('result',FALSE);
 			$s->display('auth/process.tpl');
 		}
+		}else throw new Sat_Auth_Exception();
 	}
 
 	public function logoutAction() {
@@ -65,6 +67,8 @@ public function processAction(){
 	}
 	
 	public function registerAction()  {
+		$sess = new Zend_Session_Namespace("satApp");
+		if(!$sess->isLogined) {
 		@session_start();
 		$req = $this->getRequest();
 		if(isset($_POST['form'])) {
@@ -82,7 +86,7 @@ public function processAction(){
 				}	
 				$result = $reg->authkey($req->getParam('invcode'));
 				if($result == 1)  {//邀请码有效，继续创建用户
-					//$reg->setKey($req->getParam('invcode'));
+					$reg->setKey($req->getParam('invcode'));
 					$reqarray = array(
 							"name"=>$req->getParam('Name'),
 							"passwd"=>$req->getParam('Password'),
@@ -109,20 +113,21 @@ public function processAction(){
 		$form->addElement(new Element\Hidden("form", "register"));
 		$form->addElement(new Element\Textbox("Invitation Code:", "invcode", array(
 				"required" => 1,
-				"longDesc" => "请输入邀请码！"
+				"longDesc" => "The website is only accessible to students whose schools sign contracts with SACH and meet SACH’s requirements. To access this web-site, directly contact your school management to ask SACH for details."
 		)));
 		$form->addElement(new Element\Textbox("User Name:", "Name", array(
 				"required" => 1,
-				"longDesc" => "在此处填写用户名"
+				"longDesc" => "在此处填写用户名，长度在8-16位之间，用户名应以大小英文字母开头，仅可使用_+-^四种特殊符号，且不能连续使用",
+				"validation" => new Validation\RegExp("/^([a-zA-z]{1}([a-zA-z0-9]*[\^-_\+]?[a-zA-z0-9]+)*){8-16}$/","Error: DO NOT use invalid character, your passwd >16 or <8!")
 		)));
 		$form->addElement(new Element\Password("Password:", "Password", array(
 				"required" => 1,
-				"longDesc" => "在此处填写密码",
-				"validation" => new Validation\RegExp("/^[A-Za-z0-9]{8,16}$/", "Error: The %element% must between 8~16"),
+				"longDesc" => "在此处填写密码，长度必须大于8位，小于24位（不建议），可使用大小写英文字母【.*^+-_】六种特殊符号",
+				"validation" => new Validation\RegExp("/^[A-Za-z0-9\.\*\^_\+-]{8,24}$/", "Error: The %element% must between 8~16"),
 		)));
 		$form->addElement(new Element\Password("Password Confirm:", "Password_again", array(
 				"required" => 1,
-				"longDesc" => "请确认密码"
+				"longDesc" => "请确认密码，请务必与上面的输入相符！"
 		)));
 		$form->addElement(new Element\Email("Email Address:", "Email", array(
 				"required" => 1,
@@ -141,6 +146,7 @@ public function processAction(){
 		
 		$form->render();
 
+		}else throw new Sat_Reg_Exception();
 	}
 }
 ?>

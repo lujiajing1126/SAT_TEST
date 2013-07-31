@@ -39,18 +39,18 @@ window.location = "/SAT_TEST";
 	</div>
 	<div id="ticket">
 		<div id="ticket_left">
-			<p class="text1_a">Lost in the clouds</p>
-			<p class="text2_a">Flight not found</p>
-			<p class="text3_a">Error 404</p>
+			<p class="text1_a">Oops,NOT SACHer!</p>
+			<p class="text2_a">User not found</p>
+			<p class="text3_a">LOGIN Fail</p>
 			<p class="text4_a">Sorry!</p>
 			<p class="text5_a">From</p>
-			<p class="text6_a">Somewhere</p>
+			<p class="text6_a">SACHME.COM</p>
 			<p class="text7_a">To</p>
 			<p class="text8_a">Nowhere</p>			
 			<p class="text9_a">Seat</p>
-			<p class="text10_a">404</p>
-			<p class="text11_a">Try another flight</p>
-			<p class="text12_a"><a href="http://dl.dropboxusercontent.com/u/1579682/ThemeForest/lost_in_the_clouds_error_404/1.html#">Home</a> | <a href="http://dl.dropboxusercontent.com/u/1579682/ThemeForest/lost_in_the_clouds_error_404/1.html#">About</a> | <a href="http://dl.dropboxusercontent.com/u/1579682/ThemeForest/lost_in_the_clouds_error_404/1.html#">Services</a> | <a href="http://dl.dropboxusercontent.com/u/1579682/ThemeForest/lost_in_the_clouds_error_404/1.html#">Blog</a> | <a href="http://dl.dropboxusercontent.com/u/1579682/ThemeForest/lost_in_the_clouds_error_404/1.html#">Portfolio</a></p>			
+			<p class="text10_a">400</p>
+			<p class="text11_a">Currently, SACH is not open to individual users.</p>
+			<p class="text12_a"><a href="/SAT_TEST">HOME</a>&nbsp;|&nbsp;<a href="/SAT_TEST/auth/register">Register</a></p>			
 		</div>
 		<div id="ticket_right">
 			<p class="text1_b">First class</p>
@@ -60,7 +60,7 @@ window.location = "/SAT_TEST";
 			<p class="text5_b">To</p>
 			<p class="text6_b">Nowhere</p>
 			<p class="text7_b">Seat</p>
-			<p class="text8_b">404</p>
+			<p class="text8_b">400</p>
 			<p class="text9_b">1</p>
 			<p class="text10_b">103076498</p>
 		</div>
